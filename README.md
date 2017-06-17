@@ -51,15 +51,17 @@ Bucket List Creator utilizes the flask framework
 ```
 Usage:
       Register with the application
-      Create a bucket list entry
+      Create a bucket list
       Create a bucket list description
-      Save the bucket list entry
-      Check/Tick off a completed entry
-      View all bucket list entries
-      View all completed entries
-      View all incompleted entries
+      Update a bucket list
+      Delete a bucket list
+      Create a bucket list entry
       Update a bucket list entry
       Delete a bucket list entry
+      Check/Tick off a completed entry
+      View all bucket list entries
+      View all completed bucketlists
+      View all incompleted bucketlists
 ```
 
 ## Built using
