@@ -56,6 +56,8 @@ Usage:
       Save the bucket list entry
       Check/Tick off a completed entry
       View all bucket list entries
+      View all completed entries
+      View all incompleted entries
       Update a bucket list entry
       Delete a bucket list entry
 ```
