@@ -1,0 +1,49 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>Create Entry</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="css/bucketlist.css">
+    </head>
+    <body>
+        <header>
+            <nav class="topnav">
+                <ul id="navlist">
+                    <li><a>Bucket List</a></li>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Entries</a></li>
+                    <li style="float:right"><a href="#">Log Out</a></li>
+                </ul>
+            </nav>
+        </header>
+        <div id="midsection">
+            <h3>Create Entry</h3>
+            <form action="#" method="post">
+                <fieldset>
+                    <legend>Create: </legend>
+                    <p>
+                        <label class="bucketlist" for="Name">
+                        Name: 
+                        </label><input type="text" name="name" id="Name:" size="35" maxlength="35">
+                    </p>
+                    <p>
+                        <label class="bucketlist" for="Description">
+                        Description:
+                        </label>
+                        <textarea name="description" rows="5" cols="30">
+                        Add a description...
+                        </textarea>
+                    </p>
+                    <p class="submit">
+                        <input type="submit" value="Create" />
+                        <a href="#">Cancel</a>
+                    </p>
+                </fieldset>
+            </form>
+        </div>
+        <hr />
+        <footer>
+            <p>&copy; James Kinyua</p>
+        </footer>
+    </body>
+</html>
