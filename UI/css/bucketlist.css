@@ -21,7 +21,14 @@ legend {
     padding: 2px;
 }
 
+ul#navlist {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
 ul#navlist li {
     display: inline;
+    margin-right: 20px;
 
 }
