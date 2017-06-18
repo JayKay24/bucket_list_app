@@ -8,3 +8,20 @@ label {
 .submit {
     margin-left: 8em;
 }
+
+fieldset {
+    width: 410px;
+    background-color: #ddeeff;
+    border: solid medium #053972;
+}
+
+legend {
+    border: solid 1px #053972;
+    background-color: #fff;
+    padding: 2px;
+}
+
+ul#navlist li {
+    display: inline;
+
+}
