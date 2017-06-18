@@ -58,7 +58,7 @@ Usage:
       Create a bucket list entry
       Update a bucket list entry
       Delete a bucket list entry
-      Check/Tick off a completed entry
+      Check/Tick off a completed bucketlist
       View all bucket list entries
       View all completed bucketlists
       View all incompleted bucketlists
