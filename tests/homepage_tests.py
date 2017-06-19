@@ -19,6 +19,9 @@ class HomepageTest(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
     
     def test_homepage_renders_template(self):
+        """
+        Assert the welcome message is in homepage.html
+        """
         response = self.app.get('/')
         self.assertIn(b'Welcome to Bucket List Creator.', response.data)
         
