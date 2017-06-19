@@ -1,3 +1,7 @@
+"""
+This module contains the file application instance.\
+"""
+
 from flask import Flask
 
 from config import Configuration # Import the configuration data.
