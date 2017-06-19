@@ -1,3 +1,6 @@
+"""
+This module defines the routes to be used by the flask application instance.
+"""
 from flask import render_template
 from app import app
 
