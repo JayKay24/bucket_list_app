@@ -1,5 +1,5 @@
 import unittest
-from ..main import app
+from application.main import app
 
 class BucketlistTestResponse(unittest.TestCase):
     def setUp(self):
