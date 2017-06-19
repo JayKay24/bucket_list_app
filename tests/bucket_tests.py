@@ -1,3 +1,6 @@
+"""
+This module contains tests for the homepage view function.
+"""
 import unittest
 from application.main import app
 
@@ -14,7 +17,7 @@ class HomepageTest(unittest.TestCase):
         """
         response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
-        
+    
     def test_homepage_renders_template(self):
         response = self.app.get('/')
         self.assertIn(b'Welcome to Bucket List Creator.', response.data)
