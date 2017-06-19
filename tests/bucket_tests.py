@@ -1,7 +1,10 @@
 import unittest
 from application.main import app
 
-class BucketlistTestResponse(unittest.TestCase):
+class HomepageTest(unittest.TestCase):
+    """
+    Class to test response data from homepage view.
+    """
     def setUp(self):
         self.app = app.test_client()
         
@@ -9,5 +12,10 @@ class BucketlistTestResponse(unittest.TestCase):
         response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
         
+    def test_homepage_renders_template(self):
+        response = self.app.get('/')
+        self.assertIn(b'Welcome to Bucket List Creator.', response.data)
+        
 if __name__ == '__main__':
     unittest.main()
+    
