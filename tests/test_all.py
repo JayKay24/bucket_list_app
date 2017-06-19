@@ -1,5 +1,5 @@
 import unittest
-from bucket_tests import BucketlistTestResponse
+from homepage_tests import BucketlistTestResponse
 
 def suite():
     """
