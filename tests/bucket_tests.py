@@ -9,6 +9,9 @@ class HomepageTest(unittest.TestCase):
         self.app = app.test_client()
         
     def test_homepage_works(self):
+        """
+        Return a status code of 200.
+        """
         response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
         
