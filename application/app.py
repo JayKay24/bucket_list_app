@@ -1,5 +1,5 @@
 """
-This module contains the file application instance.\
+This module contains the file application instance.
 """
 
 from flask import Flask
