@@ -1,3 +1,6 @@
+"""
+This module defines a test suite for testing all the classes in the application.
+"""
 import unittest
 from homepage_tests import HomepageTest
 from test_user import UserTest
@@ -16,3 +19,4 @@ def suite():
     
 if __name__ == '__main__':
     unittest.main(defaultTest='suite')
+    
