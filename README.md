@@ -38,14 +38,6 @@ Clone the repository using the url:
 git clone https://github.com/JayKay24/bucket_list_app.git
 ```
 
-## Running tests
-
-Open your python interpreter and change directory into the tests folder
-
-```
-pytest test_bucket_list_app.py
-```
-
 ## Usage:
 
 Bucket List Creator utilizes the flask framework
