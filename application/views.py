@@ -1,7 +1,7 @@
 """
 This module defines the routes to be used by the flask application instance.
 """
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for, flash, session
 from forms import RegistrationForm, LoginForm
 from app import app
 from models.user import User
@@ -22,12 +22,14 @@ def register():
     if request.method == 'POST':
         form = RegistrationForm(request.form)
         if form.validate():
-            first_name = form.first_name.data.decode()
-            last_name = form.last_name.data.decode()
-            email = form.email.data.decode()
-            password = form.email.data.decode()
+            first_name = form.first_name.data
+            last_name = form.last_name.data
+            email = form.email.data
+            password = form.email.data
             user = User(first_name, last_name, email, password)
-            users.append(user)
+            users[email] = user
+            session['email'] = email
+            session['password'] = password
             flash('User created successfully!', 'success')
             return redirect(url_for('login'))
     else:
@@ -42,13 +44,13 @@ def login():
     if request.method == 'POST':
         form = LoginForm(request.form)
         if form.validate():
-            email = form.email.data.decode()
-            password = form.password.data.decode()
-            for user in users:
-                if user.email == email and user.password == password:
-                    flash('You have been successfully logged in!', 'success')
-                    return redirect(url_for('homepage'))
-                    break
+            email = form.email.data
+            password = form.password.data
+            session['email'] = email
+            session['password'] = password
+            if email == session['email'] and session['password'] == password:
+                flash('You have been successfully logged in!', 'success')
+                return redirect(url_for('homepage'))
             else:
                 flash('Please register with the application first', 'success')
                 return redirect(url_for('register'))

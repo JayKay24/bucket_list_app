@@ -30,11 +30,11 @@ class LoginTest(unittest.TestCase):
         Assert login message is in homepage.
         """
         response = self.login('jameskinyua@gmail.com', 'admin')
-        assert 'You have been successfully logged in!' in response.data
+        assert b'You have been successfully logged in!' in response.data
         
     def test_login_invalid_credentials(self):
         """
         Assert login returns registration message.
         """
         response = self.login('jimmy@gmail.com', 'admin')
-        assert 'Please register with the application first' in response.data
+        assert b'Please register with the application first' in response.data
