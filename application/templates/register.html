@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% from "macros/form_field.html" import form_field %}
+{% block title %}Register{% endblock %}
+{% block content_title %}Register{% endblock %}
+{% block content %}
+<form action="#" class="form form-horizontal" method="post">
+    {{ form_field(form.first_name) }}
+    {{ form_field(form.last_name) }}
+    {{ form_field(form.email) }}
+    {{ form_field(form.password) }}
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-default">Log in</button>
+            <a class="btn" href="{{ url_for('homepage') }}">Cancel</a>
+        </div>
+    </div>
+</form>
+{% endblock %}
