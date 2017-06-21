@@ -1,7 +1,7 @@
 """
 This module defines the routes to be used by the flask application instance.
 """
-from flask import render_template, redirect, request, url_for
+from flask import render_template, redirect, request, url_for, flash
 from forms import RegistrationForm
 from app import app
 from models.user import User
@@ -28,7 +28,8 @@ def register():
             password = form.email.data
             user = User(first_name, last_name, email, password)
             users.append(user)
-            return redirect(url_for('homepage'))
+            flash('User created successfully!', 'success')
+            return redirect(url_for('login'))
     else:
         form = RegistrationForm()
         return render_template('register.html', form=form)
