@@ -14,7 +14,11 @@ class RegistrationForm(wtforms.Form):
     password = wtforms.PasswordField("Password",
                                 validators=[validators.DataRequired()])
                                 
+class LoginForm(wtforms.Form):
+    email = wtforms.StringField("Email", 
+                                validators=[validators.Email()])
                                 
-                                
+    password = wtforms.PasswordField("Password",
+                                validators=[validators.DataRequired()])
                                 
                                 
