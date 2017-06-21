@@ -1,5 +1,5 @@
 import unittest
-from application.classes.bucket_list import BucketList
+from application.models.bucket_list import BucketList
 
 class BucketListTest(unittest.TestCase):
     def setUp(self):

@@ -1,9 +1,9 @@
 """
 This module contains the file application instance.
 """
-from classes.user import User
-from classes.bucket_list import BucketList
-from classes.bucket_list_item import BucketListItem
+from models.user import User
+from models.bucket_list import BucketList
+from models.bucket_list_item import BucketListItem
 
 from flask import Flask, g
 

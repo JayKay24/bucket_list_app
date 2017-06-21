@@ -2,7 +2,7 @@
 This module instantiates and tests a User object.
 """
 import unittest
-from application.classes.user import User
+from application.models.user import User
 
 class UserTest(unittest.TestCase):
     def setUp(self):

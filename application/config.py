@@ -8,6 +8,4 @@ class Configuration(object): # Instruct Flask to run the application in DEBUG mo
     """
     DEBUG = True,
     SECRET_KEY = 'development key'
-    USERNAME = []
-    PASSWORD = []
     
