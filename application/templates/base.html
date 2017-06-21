@@ -3,17 +3,17 @@
     <head>
         <meta charset="utf-8">
         <title>{% block title %}{% endblock %}| My Bucketlist</title>
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-        <style type="text/css">
-            body {padding-top: 60px;}
-        </style>
-        {% block extra_styles %}{% endblock %}
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-		<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-		{% block extra_scripts %}{% endblock %}
+        <<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+            <style type="text/css">
+                body { padding-top: 60px; }
+            </style>
+            {% block extra_styles %}{% endblock %}
+            <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+            {% block extra_scripts %}{% endblock %}
     </head>
-    <body>
+    <body class="{% block body_class %}{% endblock %}">
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -31,6 +31,7 @@
                     <li style="float: right"><a href="#">Log in</a></li>
                 </ul>
             </div>
+        </div>
         </div>
         <div class="container">
             <div class="row">
