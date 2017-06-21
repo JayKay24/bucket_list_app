@@ -22,12 +22,11 @@ def register():
     if request.method == 'POST':
         form = RegistrationForm(request.form)
         if form.validate():
-            first_name = str(form.first_name.data)
-            last_name = form.last_name.data
-            email = form.email.data
-            password = form.email.data
+            first_name = form.first_name.data.decode()
+            last_name = form.last_name.data.decode()
+            email = form.email.data.decode()
+            password = form.email.data.decode()
             user = User(first_name, last_name, email, password)
-            print(user.fname, user.lname)
             users.append(user)
             flash('User created successfully!', 'success')
             return redirect(url_for('login'))
@@ -43,8 +42,8 @@ def login():
     if request.method == 'POST':
         form = LoginForm(request.form)
         if form.validate():
-            email = form.email.data
-            password = form.password.data
+            email = form.email.data.decode()
+            password = form.password.data.decode()
             for user in users:
                 if user.email == email and user.password == password:
                     flash('You have been successfully logged in!', 'success')
