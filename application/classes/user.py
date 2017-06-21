@@ -17,4 +17,3 @@ class User:
         Return the user's full name.
         """
         return self.fname + self.lname
-        
