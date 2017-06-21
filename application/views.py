@@ -17,4 +17,5 @@ def register():
     """
     Return and render register.html template.
     """
-    return render_template('register.html')
+    form = RegistrationForm()
+    return render_template('register.html', form=form)
