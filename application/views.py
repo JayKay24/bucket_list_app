@@ -28,6 +28,7 @@ def register():
             password = form.email.data
             user = User(first_name, last_name, email, password)
             users[email] = user
+            session['first_name'] = first_name
             session['email'] = email
             session['password'] = password
             flash('User created successfully!', 'success')
@@ -46,8 +47,6 @@ def login():
         if form.validate():
             email = form.email.data
             password = form.password.data
-            session['email'] = email
-            session['password'] = password
             if email == session['email'] and session['password'] == password:
                 flash('You have been successfully logged in!', 'success')
                 return redirect(url_for('homepage'))
@@ -57,3 +56,12 @@ def login():
     else:
         form = RegistrationForm()
     return render_template('login.html', form=form)
+    
+@app.route('/logout', methods=['GET'])
+def logout():
+    """
+    Return the user back to the homepage.
+    """
+    session.pop('email', None)
+    session.pop('password', None)
+    return redirect(url_for('homepage'))
