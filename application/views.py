@@ -32,3 +32,23 @@ def register():
     else:
         form = RegistrationForm()
         return render_template('register.html', form=form)
+        
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """
+    Return and render login.html template.
+    """
+    if request.method == 'POST':
+        form = RegistrationForm(request.form)
+        if form.validate():
+            email = form.email.data
+            password = form.password.data
+            for user in users:
+                if user.email == email and user.password == password:
+                    return redirect(url_for('homepage'))
+                    break
+            else:
+                return redirect(url_for('register'))
+    else:
+        form = RegistrationForm()
+        return render_template('login.html')
