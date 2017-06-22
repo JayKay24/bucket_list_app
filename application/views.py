@@ -57,7 +57,7 @@ def login():
                 session['logged_in'] = True
                 return redirect(url_for('homepage'))
             else:
-                flash('Please register with the application first', 'success')
+                flash('Please register with the application first', 'danger')
                 return redirect(url_for('register'))
     else:
         form = RegistrationForm()
