@@ -76,7 +76,7 @@ def create_bucket_list():
     Create a bucketlist for the user.
     """
     if request.method == 'POST':
-        form = CreateBucketListForm(request.form)
+        form = BucketListForm(request.form)
         if form.validate():
             name = form.name.data
             description = form.description.data
@@ -85,6 +85,6 @@ def create_bucket_list():
             flash('Bucket List has been successfully created!', 'success')
             return redirect(url_for('show_bucketlists'))
     else:
-        form = CreateBucketListForm()
+        form = BucketListForm()
     return render_template('create_bucketlist.html', form=form)
             
