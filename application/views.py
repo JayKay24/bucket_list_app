@@ -27,9 +27,8 @@ def register():
             email = form.email.data
             password = form.email.data
             user = User(first_name, last_name, email, password)
-            user_dict = dict(first_name=user.fname, last_name=user.lname, 
-                             email=user.email, password=user.password)
-            session['user'] = user_dict
+            app.config['EMAIL'].append(user.email)
+            app.config['PASSWORD'].append(user.password)
             flash('User created successfully!', 'success')
             return redirect(url_for('login'))
     else:
@@ -46,7 +45,7 @@ def login():
         if form.validate():
             email = form.email.data
             password = form.password.data
-            if email == app.config['EMAIL'] and password == app.config['PASSWORD']:
+            if email in app.config['EMAIL'] and password in app.config['PASSWORD']:
                 flash('You have been successfully logged in!', 'success')
                 session['logged_in'] = True
                 return redirect(url_for('homepage'))
