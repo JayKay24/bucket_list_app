@@ -64,5 +64,5 @@ def logout():
     session.pop('email', None)
     session.pop('password', None)
     session.pop('logged_out', None)
-    flash('You were logged out')
+    flash('You were logged out', 'success')
     return redirect(url_for('homepage'))
