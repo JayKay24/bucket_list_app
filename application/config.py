@@ -2,12 +2,14 @@
 This module contains the a class Configuration used to store the flask application
 instance configuration.
 """
+import os
 class Configuration(object): # Instruct Flask to run the application in DEBUG mode.
     """
     Class containing configuration for the flask application instance.
     """
     DEBUG = True,
-    SECRET_KEY = 'development key'
+    # A cryptographic random generator to set the SECRET key.
+    SECRET_KEY = os.urandom(24)
     EMAIL = ['james@gmail.com']
     PASSWORD = ['pass']
     
