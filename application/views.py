@@ -27,10 +27,9 @@ def register():
             email = form.email.data
             password = form.email.data
             user = User(first_name, last_name, email, password)
-            users[email] = user
-            session['first_name'] = first_name
-            session['email'] = email
-            session['password'] = password
+            user_dict = dict(first_name=user.fname, last_name=user.lname, 
+                             email=user.email, password=user.password)
+            session['user'] = user_dict
             flash('User created successfully!', 'success')
             return redirect(url_for('login'))
     else:
@@ -47,8 +46,9 @@ def login():
         if form.validate():
             email = form.email.data
             password = form.password.data
-            if email == session['email'] and session['password'] == password:
+            if email == app.config['EMAIL'] and password == app.config['PASSWORD']:
                 flash('You have been successfully logged in!', 'success')
+                session['logged_in'] = True
                 return redirect(url_for('homepage'))
             else:
                 flash('Please register with the application first', 'success')
@@ -64,4 +64,6 @@ def logout():
     """
     session.pop('email', None)
     session.pop('password', None)
+    session.pop('logged_out', None)
+    flash('You were logged out')
     return redirect(url_for('homepage'))
