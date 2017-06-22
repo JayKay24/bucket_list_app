@@ -1,4 +1,8 @@
+"""
+This module defines classes used to implement wtforms.
+"""
 import wtforms
+
 from wtforms import validators
 
 class RegistrationForm(wtforms.Form):
