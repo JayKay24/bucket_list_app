@@ -2,10 +2,10 @@
 This module defines the routes to be used by the flask application instance.
 """
 from flask import render_template, redirect, request, url_for, flash, session
+
 from forms import RegistrationForm, LoginForm
 from app import app
 from models.user import User
-from data_store import users
 
 @app.route('/')
 def homepage():
