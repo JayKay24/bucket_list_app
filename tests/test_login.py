@@ -29,7 +29,7 @@ class LoginTest(unittest.TestCase):
         """
         Assert login message is in homepage.
         """
-        response = self.login('jameskinyua@gmail.com', 'admin')
+        response = self.login('james@gmail.com', 'pass')
         assert b'You have been successfully logged in!' in response.data
         
     def test_login_invalid_credentials(self):
