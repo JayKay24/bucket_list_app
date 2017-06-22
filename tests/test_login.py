@@ -12,6 +12,9 @@ class LoginTest(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
         
+    def tearDown(self):
+        self.app = None
+        
     def login(self, email, password):
         """
         Helper method to log in the user.

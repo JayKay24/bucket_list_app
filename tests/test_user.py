@@ -7,6 +7,9 @@ from application.models.user import User
 class UserTest(unittest.TestCase):
     def setUp(self):
         self.user = User('James', 'Kinyua', 'jameskinyua@gmail.com', 'jim')
+        
+    def tearDown(self):
+        self.user = None
     
     def test_user_id_is_none(self):
         """
