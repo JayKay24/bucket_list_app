@@ -1,6 +1,9 @@
+"""
+This module defines classes used to implement wtforms.
+"""
 import wtforms
+
 from wtforms import validators
-from classes.user import User
 
 class RegistrationForm(wtforms.Form):
     first_name = wtforms.StringField("First name", 
@@ -15,5 +18,11 @@ class RegistrationForm(wtforms.Form):
     password = wtforms.PasswordField("Password",
                                 validators=[validators.DataRequired()])
                                 
+class LoginForm(wtforms.Form):
+    email = wtforms.StringField("Email", 
+                                validators=[validators.Email()])
+                                
+    password = wtforms.PasswordField("Password",
+                                validators=[validators.DataRequired()])
                                 
                                 
