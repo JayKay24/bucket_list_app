@@ -6,6 +6,9 @@ import wtforms
 from wtforms import validators
 
 class RegistrationForm(wtforms.Form):
+    """
+    Class used to create the fields used in the registration page.
+    """
     first_name = wtforms.StringField("First name", 
                                 validators=[validators.DataRequired()])
                                 
@@ -19,6 +22,9 @@ class RegistrationForm(wtforms.Form):
                                 validators=[validators.DataRequired()])
                                 
 class LoginForm(wtforms.Form):
+    """
+    Class used to create the fields used in the login page.
+    """
     email = wtforms.StringField("Email", 
                                 validators=[validators.Email()])
                                 
@@ -26,6 +32,9 @@ class LoginForm(wtforms.Form):
                                 validators=[validators.DataRequired()])
                                 
 class BucketListForm(wtforms.Form):
+    """
+    Class used to create the fields used in the show_bucketlist page.
+    """
     name = wtforms.StringField('Name', 
                                validators=[validators.DataRequired()])
                                
