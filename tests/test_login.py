@@ -19,7 +19,7 @@ class LoginTest(unittest.TestCase):
         """
         Helper method to log in the user.
         """
-        return self.app.post('login', data=dict(
+        return self.app.post('/login', data=dict(
         email=email, password=password), follow_redirects=True)
         
     def logout(self):

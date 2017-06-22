@@ -6,7 +6,7 @@ class BucketList:
         self.bucket_list_id = None
         self.name = name
         self.description = description
-        self.user_id = user
+        self.user= user
         self.bucket_list_items = []
         
     def get_bucket_list_items(self):

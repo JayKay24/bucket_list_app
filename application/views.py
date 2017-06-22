@@ -3,9 +3,13 @@ This module defines the routes to be used by the flask application instance.
 """
 from flask import render_template, redirect, request, url_for, flash, session
 
-from forms import RegistrationForm, LoginForm
-from app import app
+from forms import RegistrationForm, LoginForm, BucketListForm
 from models.user import User
+from models.bucket_list import BucketList
+from data_store import all_bucketlists
+from app import app
+
+user = None
 
 @app.route('/')
 def homepage():
@@ -27,6 +31,9 @@ def register():
             email = form.email.data
             password = form.email.data
             user = User(first_name, last_name, email, password)
+            if user.email in app.config['EMAIL'] and user.password in app.config['PASSWORD']:
+                flash('User already registered!', 'success')
+                return redirect(url_for('login'))
             app.config['EMAIL'].append(user.email)
             app.config['PASSWORD'].append(user.password)
             flash('User created successfully!', 'success')
@@ -66,3 +73,31 @@ def logout():
     session.pop('logged_out', None)
     flash('You were logged out', 'success')
     return redirect(url_for('homepage'))
+    
+    
+@app.route('/show-bucketlists')
+def show_all_bucketlists():
+    """
+    Display all bucket lists.
+    """
+    return render_template('show_bucketlists.html', 
+                           all_bucketlists=all_bucketlists)
+                           
+@app.route('/create-bucketlist', methods=['GET', 'POST'])
+def create_bucket_list():
+    """
+    Create a bucketlist for the user.
+    """
+    if request.method == 'POST':
+        form = BucketListForm(request.form)
+        if form.validate():
+            name = form.name.data
+            description = form.description.data
+            bucket_list = BucketList(name, description, user)
+            all_bucketlists.append(bucket_list)
+            flash('Bucket List has been successfully created!', 'success')
+            return redirect(url_for('show_all_bucketlists'))
+    else:
+        form = BucketListForm()
+    return render_template('create_bucketlist.html', form=form)
+            

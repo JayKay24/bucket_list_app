@@ -30,7 +30,7 @@
                     <li style="float:right"><a href="{{ url_for('register') }}">Register</a></li>
                     <li style="float:right"><a href="{{ url_for('login') }}">Log in</a></li>
                     {% if session.logged_in %}
-                        <li><a href="">Create Bucketlist</a></li>
+                        <li><a href="{{ url_for('create_bucket_list') }}">Create Bucketlist</a></li>
                         <li style="float:right"><a href="{{ url_for('logout') }}">Log out</a></li>
                     {% endif %}
                 </ul>

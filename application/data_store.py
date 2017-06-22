@@ -4,5 +4,6 @@ from models.bucket_list_item import BucketListItem
 from models.user import User
 
 users = {}
+all_bucketlists = []
 
 

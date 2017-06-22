@@ -25,4 +25,12 @@ class LoginForm(wtforms.Form):
     password = wtforms.PasswordField("Password",
                                 validators=[validators.DataRequired()])
                                 
+class BucketListForm(wtforms.Form):
+    name = wtforms.StringField('Name', 
+                               validators=[validators.DataRequired()])
+                               
+    description = wtforms.TextAreaField('Description', 
+                                validators=[validators.DataRequired()])
+                                
+                                
                                 
