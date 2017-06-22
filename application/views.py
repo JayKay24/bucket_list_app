@@ -71,7 +71,16 @@ def logout():
     flash('You were logged out', 'success')
     return redirect(url_for('homepage'))
     
-@app.route('/create-bucketlist')
+    
+@app.route('/show-bucketlists')
+def show_all_bucketlists():
+    """
+    Display all bucket lists.
+    """
+    return render_template('show_bucketlists.html', 
+                           all_bucketlists=all_bucketlists)
+                           
+@app.route('/create-bucketlist', methods=['GET', 'POST'])
 def create_bucket_list():
     """
     Create a bucketlist for the user.
@@ -88,12 +97,4 @@ def create_bucket_list():
     else:
         form = BucketListForm()
     return render_template('create_bucketlist.html', form=form)
-    
-@app.route('/show-bucketlists')
-def show_all_bucketlists():
-    """
-    Display all bucket lists.
-    """
-    return render_template('show_bucketlists.html', 
-                           all_bucketlists=all_bucketlists)
             
