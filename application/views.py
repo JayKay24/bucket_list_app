@@ -31,6 +31,9 @@ def register():
             email = form.email.data
             password = form.email.data
             user = User(first_name, last_name, email, password)
+            if user.email in app.config['EMAIL'] and user.password in app.config['PASSWORD']:
+                flash('User already registered!', 'success')
+                return redirect(url_for('login'))
             app.config['EMAIL'].append(user.email)
             app.config['PASSWORD'].append(user.password)
             flash('User created successfully!', 'success')
