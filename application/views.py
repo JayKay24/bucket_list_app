@@ -70,7 +70,7 @@ def logout():
     """
     session.pop('email', None)
     session.pop('password', None)
-    session.pop('logged_out', None)
+    session.pop('logged_in', None)
     flash('You were logged out', 'success')
     return redirect(url_for('homepage'))
     
@@ -100,17 +100,6 @@ def create_bucket_list():
     else:
         form = BucketListForm()
     return render_template('create_bucketlist.html', form=form)
-    
-@app.route('/delete-bucketlist/<obj>')
-def delete_bucketlist(obj):
-    """
-    Delete a bucketlist for the user.
-    """
-    if request.method == 'POST':
-        for i in range(len(all_bucketlists)):
-            if (obj.name == all_bucketlists[i].name) and \
-            (obj.description == all_bucketlists[i].description):
-                all_bucketlists.pop(i)
-            flash('Bucket List has been successfully deleted!', 'success')
-        return redirect(url_for('show_all_bucketlists'))
+ 
+
             
