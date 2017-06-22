@@ -4,7 +4,8 @@ This module defines the routes to be used by the flask application instance.
 from flask import render_template, redirect, request, url_for, flash, session
 
 from forms import RegistrationForm, LoginForm, BucketListForm
-from models import User, BucketList
+from models.user import User
+from models.bucket_list import BucketList
 from data_store import all_bucketlists
 from app import app
 
@@ -83,8 +84,16 @@ def create_bucket_list():
             bucket_list = BucketList(name, description, user)
             all_bucketlists.append(bucket_list)
             flash('Bucket List has been successfully created!', 'success')
-            return redirect(url_for('show_bucketlists'))
+            return redirect(url_for('show_all_bucketlists'))
     else:
         form = BucketListForm()
     return render_template('create_bucketlist.html', form=form)
+    
+@app.route('/show_bucketlists')
+def show_all_bucketlists():
+    """
+    Display all bucket lists.
+    """
+    return render_template('show_bucketlists.html', 
+                           all_bucketlists=all_bucketlists)
             

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% from "macros/form_field.html" import form_field %}
-{% block title %}Log in{% endblock %}
-{% block content_title %}Register{% endblock %}
+{% block title %}Create Bucketlist{% endblock %}
+{% block content_title %}Create Bucketlist{% endblock %}
 {% block content %}
 <form action="{{ url_for('create_bucket_list') }}" class="form form-horizontal" method="post">
     {{ form_field(form.name) }}
@@ -9,7 +9,7 @@
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
             <button type="submit" class="btn btn-default">Create</button>
-            <a class="btn" href="{{ url_for('bucket_lists.html') }}">Cancel</a>
+            <a class="btn" href="{{ url_for('homepage') }}">Cancel</a>
         </div>
     </div>
 </form>
