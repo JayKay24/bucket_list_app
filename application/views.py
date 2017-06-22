@@ -4,8 +4,11 @@ This module defines the routes to be used by the flask application instance.
 from flask import render_template, redirect, request, url_for, flash, session
 
 from forms import RegistrationForm, LoginForm
-from app import app
 from models.user import User
+from app import app
+from data_store import all_bucketlists
+
+user = None
 
 @app.route('/')
 def homepage():
@@ -66,3 +69,22 @@ def logout():
     session.pop('logged_out', None)
     flash('You were logged out', 'success')
     return redirect(url_for('homepage'))
+    
+@app.route('/create-bucketlist')
+def create_bucket_list():
+    """
+    Create a bucketlist for the user.
+    """
+    if request.method == 'POST':
+        form = CreateBucketListForm(request.form)
+        if form.validate():
+            name = form.name.data
+            description = form.description.data
+            bucket_list = BucketList(name, description, user)
+            all_bucketlists.append(bucket_list)
+            flash('Bucket List has been successfully created!', 'success')
+            return redirect(url_for('show_bucketlists'))
+    else:
+        form = CreateBucketListForm()
+    return render_template('create_bucketlist.html', form=form)
+            
