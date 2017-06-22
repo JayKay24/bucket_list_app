@@ -89,7 +89,7 @@ def create_bucket_list():
         form = BucketListForm()
     return render_template('create_bucketlist.html', form=form)
     
-@app.route('/show_bucketlists')
+@app.route('/show-bucketlists')
 def show_all_bucketlists():
     """
     Display all bucket lists.
