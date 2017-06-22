@@ -1,4 +1,8 @@
+"""
+This module defines a test class for testing the BucketList class.
+"""
 import unittest
+
 from application.models.bucket_list import BucketList
 
 class BucketListTest(unittest.TestCase):
