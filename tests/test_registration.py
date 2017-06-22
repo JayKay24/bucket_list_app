@@ -11,6 +11,9 @@ class RegistrationTest(unittest.TestCase):
     """
     def setUp(self):
         self.app = app.test_client()
+        
+    def tearDown(self):
+        self.app = None
     
     def test_registration_view_returns_200_status_code(self):
         """

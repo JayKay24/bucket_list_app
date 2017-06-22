@@ -11,6 +11,9 @@ class HomepageTest(unittest.TestCase):
     def setUp(self):
         self.app = app.test_client()
         
+    def tearDown(self):
+        self.app = None
+        
     def test_homepage_returns_200(self):
         """
         Return a status code of 200.
