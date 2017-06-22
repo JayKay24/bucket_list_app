@@ -3,10 +3,10 @@ This module defines the routes to be used by the flask application instance.
 """
 from flask import render_template, redirect, request, url_for, flash, session
 
-from forms import RegistrationForm, LoginForm
-from models.user import User
-from app import app
+from forms import RegistrationForm, LoginForm, BucketListForm
+from models import User, BucketList
 from data_store import all_bucketlists
+from app import app
 
 user = None
 
