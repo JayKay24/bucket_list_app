@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% from "macros/form_field.html" import form_field %}
-{% block title %}Register{% endblock %}
-{% block content_title %}Register{% endblock %}
+{% block title %}Delete{% endblock %}
+{% block content_title %}Delete{% endblock %}
 {% block content %}
-<form action="{{ url_for('register') }}" class="form form-horizontal" method="post">
+<form action="{{ url_for(delete) }}" class="form form-horizontal" method="post">
     {{ form_field(form.first_name) }}
     {{ form_field(form.last_name) }}
     {{ form_field(form.email) }}
