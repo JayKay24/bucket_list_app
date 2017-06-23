@@ -65,7 +65,7 @@ def login():
                 return redirect(url_for('homepage'))
                 
             else:
-                flash('Invalid email or password!', 'danger')
+                flash('Please register with the application first', 'danger')
                 return redirect(url_for('register'))
     else:
         form = LoginForm()
