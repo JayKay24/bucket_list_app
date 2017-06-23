@@ -3,13 +3,13 @@ This module defines the routes to be used by the flask application instance.
 """
 from flask import render_template, redirect, request, url_for, flash, session
 
+from app import app
 from forms import RegistrationForm, LoginForm, BucketListForm
 from models.user import User
 from models.bucket_list import BucketList
-from data_store import all_bucketlists
-from app import app
+from data_store import all_users, all_bucketlists
 
-user = None
+current_user = None
 
 @app.route('/')
 def homepage():
@@ -31,13 +31,18 @@ def register():
             email = form.email.data
             password = form.email.data
             user = User(first_name, last_name, email, password)
-            if user.email in app.config['EMAIL'] and user.password in app.config['PASSWORD']:
+            
+            if email in app.config['EMAIL'] and password in app.config['PASSWORD']:
                 flash('User already registered!', 'success')
                 return redirect(url_for('login'))
-            app.config['EMAIL'].append(user.email)
-            app.config['PASSWORD'].append(user.password)
-            flash('User created successfully!', 'success')
-            return redirect(url_for('login'))
+            else:
+                global current_user
+                current_user = user
+                
+                app.config['EMAIL'].append(user.email)
+                app.config['PASSWORD'].append(user.password)
+                flash('User created successfully!', 'success')
+                return redirect(url_for('login'))
     else:
         form = RegistrationForm()
     return render_template('register.html', form=form)
@@ -52,15 +57,17 @@ def login():
         if form.validate():
             email = form.email.data
             password = form.password.data
+            
             if email in app.config['EMAIL'] and password in app.config['PASSWORD']:
                 flash('You have been successfully logged in!', 'success')
                 session['logged_in'] = True
+                
                 return redirect(url_for('homepage'))
             else:
-                flash('Please register with the application first', 'danger')
+                flash('Invalid email or password!', 'danger')
                 return redirect(url_for('register'))
     else:
-        form = RegistrationForm()
+        form = LoginForm()
     return render_template('login.html', form=form)
     
 @app.route('/logout', methods=['GET'])
@@ -93,7 +100,9 @@ def create_bucket_list():
         if form.validate():
             name = form.name.data
             description = form.description.data
-            bucket_list = BucketList(name, description, user)
+            global current_user
+            
+            bucket_list = BucketList(name, description, current_user)
             all_bucketlists.append(bucket_list)
             flash('Bucket List has been successfully created!', 'success')
             return redirect(url_for('show_all_bucketlists'))
