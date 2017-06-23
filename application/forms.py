@@ -21,6 +21,7 @@ class RegistrationForm(wtforms.Form):
     password = wtforms.PasswordField("Password",
                                 validators=[validators.DataRequired()])
                                 
+                                
 class LoginForm(wtforms.Form):
     """
     Class used to create the fields used in the login page.

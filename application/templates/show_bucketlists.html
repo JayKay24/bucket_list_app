@@ -8,6 +8,8 @@
                 <h5>{{ bucket_list.name }}</h5>
                 <br />
                 {{ bucket_list.description }}
+                <a href="/delete-bucketlist/{{ bucket_list.name }}/{{ bucket_list.description }}"><button class="btn btn-default">Delete</button></a>
+                
             </p>
             <hr />
         {% endfor %}

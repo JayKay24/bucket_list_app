@@ -3,7 +3,7 @@
 {% block title %}Delete{% endblock %}
 {% block content_title %}Delete{% endblock %}
 {% block content %}
-<form action="{{ url_for(delete) }}" class="form form-horizontal" method="post">
+<form action="{{ url_for('delete_bucketlist', obj=obj) }}" class="form form-horizontal" method="post">
     {{ obj.name }}
     {{ obj.description }}
     <div class="form-group">
