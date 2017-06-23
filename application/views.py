@@ -63,6 +63,7 @@ def login():
                 session['logged_in'] = True
                 
                 return redirect(url_for('homepage'))
+                
             else:
                 flash('Invalid email or password!', 'danger')
                 return redirect(url_for('register'))
