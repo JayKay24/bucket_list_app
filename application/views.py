@@ -110,15 +110,16 @@ def create_bucket_list():
         form = BucketListForm()
     return render_template('create_bucketlist.html', form=form)
  
-@app.route('/delete-bucketlist/<obj>', methods=['GET', 'POST'])
-def delete_bucketlist(obj):
+@app.route('/delete-bucketlist/<name>/<description>')
+def delete_bucketlist(name, description):
     """
     Delete a bucketlist in the application.
     """
-    if request.method == 'POST':
-        for i in range(len(all_bucketlists)):
-            if ((all_bucketlists[i].name == obj.name) and 
-            (all_bucketlists[i].description == obj.description)):
-                del all_bucketlists[i]
-                flash('Bucketlist successfully deleted!')
-                return redirect('show_all_bucketlists')
+    for i in range(len(all_bucketlists)):
+        if (all_bucketlists[i].name == name and
+        all_bucketlists[i].description == description):
+            del all_bucketlists[i]
+            flash('Bucketlist successfully deleted!', 'success')
+            return redirect(url_for('show_all_bucketlists', 
+                                    all_bucketlists=all_bucketlists))
+    

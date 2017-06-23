@@ -8,11 +8,7 @@
                 <h5>{{ bucket_list.name }}</h5>
                 <br />
                 {{ bucket_list.description }}
-                <form action="{{ url_for('delete_bucketlist', obj=bucket_list) }}" class="form-group">
-                    <button type="submit" class="btn btn-default">
-                         Delete
-                    </button>
-                </form>
+                <a href="/delete-bucketlist/{{ bucket_list.name }}/{{ bucket_list.description }}"><button class="btn btn-default">Delete</button></a>
                 
             </p>
             <hr />
