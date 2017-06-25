@@ -33,7 +33,7 @@ def register():
             user = User(first_name, last_name, email, password)
             
             if email in app.config['EMAIL'] and password in app.config['PASSWORD']:
-                flash('User already registered!', 'success')
+                flash('User already registered!', 'danger')
                 return redirect(url_for('login'))
             else:
                 global current_user
@@ -123,4 +123,27 @@ def delete_bucketlist(name, description):
             flash('Bucketlist successfully deleted!', 'success')
             return redirect(url_for('show_all_bucketlists', 
                                     all_bucketlists=all_bucketlists))
+                                    
+@app.route('/edit/<name>/<description>')
+def edit_bucketlist(name, description):
+    """
+    Edit a bucketlist in the application.
+    """
+    bucketlist = None
+    for i in range(len(all_bucketlists)):
+        if (all_bucketlists[i].name == name and 
+        all_bucketlists[i].description == description):
+            bucketlist = all_bucketlists.pop(i)
+    if request.method == 'POST':
+        form = BucketListForm(request.form, bucketlist=bucketlist)
+        if form.validate():
+            name = form.name.data
+            description = form.name.data
+            bucketlist = BucketList(name, description)
+            all_bucketlists.append(bucketlist)
+            flash('Bucketlist has been successfully edited!', 'success')
+            return redirect(url_for('show_all_bucketlists'))
+    else:
+        form = BucketListForm(bucketlist=bucketlist)
+    return render_template('edit_bucketlist.html', bucketlist=bucketlist)
     
