@@ -7,7 +7,7 @@ from app import app
 from forms import RegistrationForm, LoginForm, BucketListForm
 from models.user import User
 from models.bucket_list import BucketList
-from data_store import all_users, all_bucketlists
+from bucket_list_app import all_users, all_bucketlists
 
 current_user = None
 

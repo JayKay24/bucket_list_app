@@ -3,6 +3,9 @@ from models.bucket_list import BucketList
 from models.bucket_list_item import BucketListItem
 from models.user import User
 
+all_users = []
+all_bucketlists = []
+
 class BucketListApp:
     """
     Controller class to manipulate class models.
@@ -24,5 +27,17 @@ class BucketListApp:
         user = User(fname, lname, email, password)
         self.users.append(user)
         return True
+        
+    def load_user(self, email, password):
+        """
+        Load the current user into the application upon logging in.
+        """
+        for i in range(len(self.users)):
+            if (self.users[i].email == email and 
+            self.users[i].password == password):
+                self.current_user = self.users.pop(i)
+                return True
+        return False
+        
 
 
