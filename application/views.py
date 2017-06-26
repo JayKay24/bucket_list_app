@@ -112,13 +112,11 @@ def delete_bucketlist(name, description):
     """
     Delete a bucketlist in the application.
     """
-    for i in range(len(all_bucketlists)):
-        if (all_bucketlists[i].name == name and
-        all_bucketlists[i].description == description):
-            del all_bucketlists[i]
-            flash('Bucketlist successfully deleted!', 'success')
-            return redirect(url_for('show_all_bucketlists', 
-                                    all_bucketlists=all_bucketlists))
+    response = bucket_list_app.delete_bucketlist(name, description)
+    if response is True:
+        flash('Bucketlist successfully deleted!', 'success')
+        return redirect(url_for('show_all_bucketlists', 
+                    all_bucketlists=bucket_list_app.current_user.bucketlists))
                                     
 @app.route('/edit-bucketlist/<name>/<description>', methods=['GET', 'POST'])
 def edit_bucket_list(name, description):
