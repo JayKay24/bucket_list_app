@@ -25,7 +25,6 @@ class BucketListApp:
                 return False
         user = User(fname, lname, email, password)
         self.users.append(user)
-        print(self.users[0].email, self.users[0].password)
         return True
         
     def load_user(self, email, password):

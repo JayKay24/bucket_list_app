@@ -123,21 +123,19 @@ def edit_bucket_list(name, description):
     """
     Edit a bucketlist in the application.
     """
-    bucketlist = None
-    for i in range(len(all_bucketlists)):
-        if (all_bucketlists[i].name == name and 
-        all_bucketlists[i].description == description):
-            bucketlist = all_bucketlists.pop(i)
+    bucket_list_app.load_bucketlist(name, description)
     if request.method == 'POST':
-        form = BucketListForm(request.form, obj=bucketlist)
+        form = BucketListForm(request.form, 
+                              obj=bucket_list_app.current_bucketlist)
         if form.validate():
             name = form.name.data
             description = form.name.description
-            bucketlist = BucketList(name, description)
-            all_bucketlists.append(bucketlist)
+            
+            bucket_list_app.edit_bucketlist(name, description)
             flash('Bucketlist has been successfully edited!', 'success')
             return redirect(url_for('show_all_bucketlists'))
     else:
-        form = BucketListForm(obj=bucketlist)
-    return render_template('edit_bucketlist.html', form=form, bucketlist=bucketlist)
+        form = BucketListForm(obj=bucket_list_app.current_bucketlist)
+    return render_template('edit_bucketlist.html', form=form, 
+                           bucketlist=bucket_list_app.current_bucketlist)
     
