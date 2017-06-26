@@ -14,6 +14,7 @@ class BucketListAppTest(unittest.TestCase):
         self.bucket_list_app = BucketListApp()
         self.bucket_list_app.create_user("James", "Kinyua", "james@gmail.com",
                                          "pass")
+        self.bucket_list_app.load_user("james@gmail.com", "pass")
         
     def tearDown(self):
         self.bucket_list_app = None
