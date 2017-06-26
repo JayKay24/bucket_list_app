@@ -27,3 +27,10 @@ class BucketListAppTest(unittest.TestCase):
         self.assertFalse(response, 
         "should return False for already registered user")
         
+    def test_load_user_returns_False_if_user_does_not_exist(self):
+        """
+        Assert response is False if user does not exist.
+        """
+        response = self.bucket_list_app.load_user("winnie@gmail.com", "adisa")
+        self.assertFalse(response, 
+        "should return False if user is not registered")
