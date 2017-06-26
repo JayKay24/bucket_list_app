@@ -50,7 +50,7 @@ class BucketListApp:
         if self.current_user is not None:
             for i in range(len(self.current_user.bucketlists)):
                 if (self.current_user.bucketlists[i].name == name and 
-                self.create_user.bucketlists[i].description == description):
+                self.current_user.bucketlists[i].description == description):
                     return False
             # The bucketlist is unique.
             bucketlist = BucketList(name, description, self.current_user)
@@ -75,4 +75,18 @@ class BucketListApp:
         else:
             return None
             
+    def load_bucketlist(self, name, description):
+        """
+        Load the current bucketlist for editing.
+        """
+        if self.current_user is not None:
+            for i in range(len(self.current_user.bucketlists)):
+                if (self.current_user.bucketlists[i].name == name and 
+                self.current_user.bucketlists[i].description == description):
+                    self.current_bucketlist = self.current_user.bucketlists.pop(i)
+                    return True
+            else:
+                return False
+        else:
+            return None
 
