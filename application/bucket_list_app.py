@@ -63,7 +63,7 @@ class BucketListApp:
             for i in range(len(self.current_user.bucketlists)):
                 if (self.current_user.bucketlists[i].name == name and 
                 self.current_user.bucketlists[i].description == description):
-                    del self.current_user.bucketists[i]
+                    del self.current_user.bucketlists[i]
                     return True
             else:
                 # The bucketlist was not found.

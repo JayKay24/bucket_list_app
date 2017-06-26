@@ -7,9 +7,10 @@ from app import app
 from forms import RegistrationForm, LoginForm, BucketListForm
 from models.user import User
 from models.bucket_list import BucketList
-from bucket_list_app import all_users, all_bucketlists
+from bucket_list_app import BucketListApp, all_users, all_bucketlists
 
 current_user = None
+bucket_list_app = BucketListApp()
 
 @app.route('/')
 def homepage():
@@ -30,19 +31,13 @@ def register():
             last_name = form.last_name.data
             email = form.email.data
             password = form.email.data
-            user = User(first_name, last_name, email, password)
-            
-            if email in app.config['EMAIL'] and password in app.config['PASSWORD']:
-                flash('User already registered!', 'danger')
-                return redirect(url_for('login'))
-            else:
-                global current_user
-                current_user = user
-                
-                app.config['EMAIL'].append(user.email)
-                app.config['PASSWORD'].append(user.password)
+            response = bucket_list_app.create_user(first_name, last_name, 
+                                                   email, password)
+            if response is True:
                 flash('User created successfully!', 'success')
                 return redirect(url_for('login'))
+            else:
+                flash('User already registered!', 'danger')
     else:
         form = RegistrationForm()
     return render_template('register.html', form=form)

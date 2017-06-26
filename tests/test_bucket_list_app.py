@@ -14,7 +14,7 @@ class BucketListAppTest(unittest.TestCase):
         self.bucket_list_app = BucketListApp()
         self.bucket_list_app.create_user("James", "Kinyua", "james@gmail.com",
                                          "pass")
-        
+                                 
     def tearDown(self):
         self.bucket_list_app = None
         
@@ -44,3 +44,25 @@ class BucketListAppTest(unittest.TestCase):
                                         "Climb all mountains in Kenya")
         self.assertTrue(response, 
         "should return True for a unique bucketlist entry")
+        
+    def test_delete_bucketlist_returns_False_if_bucketlist_does_not_exist(self):
+        """
+        Assert response is False if bucketlist does not exist.
+        """
+        self.bucket_list_app.load_user("james@gmail.com", "pass")
+        response = self.bucket_list_app.delete_bucketlist("Mountain Climbing",
+                                        "Climb all mountains in Kenya")
+        self.assertFalse(response, 
+        "should return False for a non-existent bucketlist")
+        
+    def test_delete_bucketlist_returns_True_if_bucketlist_exists(self):
+        """
+        Assert response is True if bucketlist exists.
+        """
+        self.bucket_list_app.load_user("james@gmail.com", "pass")
+        self.bucket_list_app.create_bucketlist("Mountain Climbing", 
+                                        "Climb all mountains in Kenya")
+        response = self.bucket_list_app.delete_bucketlist("Mountain Climbing",
+                                        "Climb all mountains in Kenya")
+        self.assertTrue(response, "should return True if bucketlist exists")
+        
