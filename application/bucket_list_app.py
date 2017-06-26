@@ -21,8 +21,8 @@ class BucketListApp:
         Create a user upon registration.
         """
         for user in self.users:
-            if (user.email == email and user.fname == fname and 
-            user.lname == lname):
+            if (user.email == email and user.password == password or
+            user.fname == fname and user.lname == lname):
                 return False
         user = User(fname, lname, email, password)
         self.users.append(user)
@@ -55,5 +55,20 @@ class BucketListApp:
         else:
             return None
         
-
+    def delete_bucketlist(self, name, description):
+        """
+        Delete a bucketlist using the strings name and description.
+        """
+        if self.current_user is not None:
+            for i in range(len(self.current_user.bucketlists)):
+                if (self.current_user.bucketlists[i].name == name and 
+                self.current_user.bucketlists[i].description == description):
+                    del self.current_user.bucketists[i]
+                    return True
+            else:
+                # The bucketlist was not found.
+                return False
+        else:
+            return None
+            
 
