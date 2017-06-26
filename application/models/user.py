@@ -9,7 +9,7 @@ class User:
         self.email = email
         self.password = password
         # Store the user's bucketlists in a list.
-        self.bucket_lists = []
+        self.bucketlists = []
         
     def get_full_name(self):
         """
