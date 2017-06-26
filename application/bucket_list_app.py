@@ -18,9 +18,11 @@ class BucketListApp:
         Create a user upon registration.
         """
         for user in self.users:
-            if (user.fname == fname and user.lname == lname):
+            if (user.email == email and user.fname == fname and 
+            user.lname == lname):
                 return False
         user = User(fname, lname, email, password)
+        self.users.append(user)
         return True
 
 
