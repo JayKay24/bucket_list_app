@@ -34,3 +34,4 @@ class BucketListAppTest(unittest.TestCase):
         response = self.bucket_list_app.load_user("winnie@gmail.com", "adisa")
         self.assertFalse(response, 
         "should return False if user is not registered")
+        

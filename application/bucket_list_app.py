@@ -39,5 +39,21 @@ class BucketListApp:
                 return True
         return False
         
+    def create_bucketlist(self, name, description):
+        """
+        Create a bucketlist using the strings name and description.
+        """
+        if self.current_user is not None:
+            for i in range(len(self.current_user.bucketlists)):
+                if (self.current_user.bucketlists[i].name == name and 
+                self.create_user.bucketlists[i].description == description):
+                    return False
+            # The bucketlist is unique.
+            bucketlist = BucketList(name, description, self.current_user)
+            self.current_user.bucketlists.append(bucketlist)
+            return True
+        else:
+            return None
+        
 
 
