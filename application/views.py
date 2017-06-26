@@ -124,8 +124,8 @@ def delete_bucketlist(name, description):
             return redirect(url_for('show_all_bucketlists', 
                                     all_bucketlists=all_bucketlists))
                                     
-@app.route('/edit/<name>/<description>')
-def edit_bucketlist(name, description):
+@app.route('/edit-bucketlist/<name>/<description>', methods=['GET', 'POST'])
+def edit_bucket_list(name, description):
     """
     Edit a bucketlist in the application.
     """
@@ -135,15 +135,15 @@ def edit_bucketlist(name, description):
         all_bucketlists[i].description == description):
             bucketlist = all_bucketlists.pop(i)
     if request.method == 'POST':
-        form = BucketListForm(request.form, bucketlist=bucketlist)
+        form = BucketListForm(request.form, obj=bucketlist)
         if form.validate():
             name = form.name.data
-            description = form.name.data
+            description = form.name.description
             bucketlist = BucketList(name, description)
             all_bucketlists.append(bucketlist)
             flash('Bucketlist has been successfully edited!', 'success')
             return redirect(url_for('show_all_bucketlists'))
     else:
-        form = BucketListForm(bucketlist=bucketlist)
-    return render_template('edit_bucketlist.html', bucketlist=bucketlist)
+        form = BucketListForm(obj=bucketlist)
+    return render_template('edit_bucketlist.html', form=form, bucketlist=bucketlist)
     

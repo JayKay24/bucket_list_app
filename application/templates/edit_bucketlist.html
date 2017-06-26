@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% from "macros/form_field.html" import form_field %}
+{% block title %}Edit Bucketlist{% endblock %}
+{% block content_title %}Edit Bucketlist{% endblock %}
+{% block content %}
+<form action="/edit-bucketlist/{{ bucket_list.name }}/{{ bucket_list.description }}" class="form form-horizontal" method="post">
+    {{ form_field(form.name) }}
+    {{ form_field(form.description) }}
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <button type="submit" class="btn btn-default">Create</button>
+            <a class="btn" href="{{ url_for('show_all_bucketlists') }}">Cancel</a>
+        </div>
+    </div>
+</form>
+{% endblock %}
