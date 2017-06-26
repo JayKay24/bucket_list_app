@@ -1,7 +1,5 @@
 class BucketListItem:
-    def __init__(self, name=None, description=None, bucket_list=None):
-        self.bucket_list_id = bucket_list
+    def __init__(self, name=None, description=None, bucketlist=None):
         self.name = None
         self.description = description
-        
-        
+        self.bucketlist = bucketlist        
