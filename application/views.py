@@ -129,7 +129,7 @@ def edit_bucket_list(name, description):
                               obj=bucket_list_app.current_bucketlist)
         if form.validate():
             name = form.name.data
-            description = form.name.description
+            description = form.description.data
             
             bucket_list_app.edit_bucketlist(name, description)
             flash('Bucketlist has been successfully edited!', 'success')
