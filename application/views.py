@@ -3,13 +3,13 @@ This module defines the routes to be used by the flask application instance.
 """
 from flask import render_template, redirect, request, url_for, flash, session
 
-from app import app
-from forms import RegistrationForm, LoginForm, BucketListForm
-from models.user import User
-from models.bucket_list import BucketList
 from bucket_list_app import BucketListApp, all_users, all_bucketlists
+from forms import RegistrationForm, LoginForm, BucketListForm
+from models.bucket_list import BucketList
 
 current_user = None
+from app import app
+
 bucket_list_app = BucketListApp()
 
 @app.route('/')
@@ -30,7 +30,8 @@ def register():
             first_name = form.first_name.data
             last_name = form.last_name.data
             email = form.email.data
-            password = form.email.data
+            password = form.password.data
+            
             response = bucket_list_app.create_user(first_name, last_name, 
                                                    email, password)
             if response is True:
@@ -54,6 +55,7 @@ def login():
             password = form.password.data
             
             response = bucket_list_app.load_user(email, password)
+            print(response)
             if response is True:
                 flash('You have been successfully logged in!', 'success')
                 session['logged_in'] = True
@@ -61,6 +63,7 @@ def login():
             else:
                 flash('Please register with the application first', 'danger')
                 return redirect(url_for('register'))
+                
     else:
         form = LoginForm()
     return render_template('login.html', form=form)
@@ -70,8 +73,6 @@ def logout():
     """
     Return the user back to the homepage.
     """
-    session.pop('email', None)
-    session.pop('password', None)
     session.pop('logged_in', None)
     flash('You were logged out', 'success')
     return redirect(url_for('homepage'))
@@ -95,11 +96,12 @@ def create_bucket_list():
         if form.validate():
             name = form.name.data
             description = form.description.data
-            global current_user
             
-            bucket_list = BucketList(name, description, current_user)
-            all_bucketlists.append(bucket_list)
-            flash('Bucket List has been successfully created!', 'success')
+            response = bucket_list_app.create_bucketlist(name, description)
+            if response is True:
+                flash('Bucketlist has been successfully created!', 'success')
+            elif response is False:
+                flash('Bucketlist already exists!', 'danger')
             return redirect(url_for('show_all_bucketlists'))
     else:
         form = BucketListForm()

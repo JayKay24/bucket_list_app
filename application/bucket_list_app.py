@@ -1,4 +1,3 @@
-from app import app
 from models.bucket_list import BucketList
 from models.bucket_list_item import BucketListItem
 from models.user import User
@@ -26,18 +25,23 @@ class BucketListApp:
                 return False
         user = User(fname, lname, email, password)
         self.users.append(user)
+        print(self.users[0].email, self.users[0].password)
         return True
         
     def load_user(self, email, password):
         """
         Load the current user into the application upon logging in.
         """
+        value = None
         for i in range(len(self.users)):
             if (self.users[i].email == email and 
             self.users[i].password == password):
                 self.current_user = self.users.pop(i)
-                return True
-        return False
+                value = True
+                break
+        else:
+            value = False
+        return value
         
     def create_bucketlist(self, name, description):
         """
