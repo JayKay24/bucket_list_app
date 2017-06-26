@@ -53,12 +53,11 @@ def login():
             email = form.email.data
             password = form.password.data
             
-            if email in app.config['EMAIL'] and password in app.config['PASSWORD']:
+            response = bucket_list_app.load_user(email, password)
+            if response is True:
                 flash('You have been successfully logged in!', 'success')
                 session['logged_in'] = True
-                
                 return redirect(url_for('homepage'))
-                
             else:
                 flash('Please register with the application first', 'danger')
                 return redirect(url_for('register'))
