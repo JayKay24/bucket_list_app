@@ -35,3 +35,11 @@ class BucketListAppTest(unittest.TestCase):
         self.assertFalse(response, 
         "should return False if user is not registered")
         
+    def test_create_bucketlist_returns_True_for_unique_bucketlist(self):
+        """
+        Assert response is True if bucketlist is unique.
+        """
+        response = self.bucket_list_app.create_bucketlist("Mountain Climbing", 
+                                        "Climb all mountains in Kenya")
+        self.assertTrue(response, 
+        "should return True for a unique bucketlist entry")
