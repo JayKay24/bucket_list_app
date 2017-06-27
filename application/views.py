@@ -74,6 +74,7 @@ def logout():
     Return the user back to the homepage.
     """
     session.pop('logged_in', None)
+    bucket_list_app.users.append(bucket_list_app.current_user)
     flash('You were logged out', 'success')
     return redirect(url_for('homepage'))
     
@@ -135,6 +136,7 @@ def edit_bucket_list(name, description):
             flash('Bucketlist has been successfully edited!', 'success')
             return redirect(url_for('show_all_bucketlists'))
     else:
+        bucket_list_app.current_user.bucketlists.append(bucket_list_app.current_bucketlist)
         form = BucketListForm(obj=bucket_list_app.current_bucketlist)
     return render_template('edit_bucketlist.html', form=form, 
                            bucketlist=bucket_list_app.current_bucketlist)
