@@ -89,6 +89,17 @@ class BucketListApp:
         else:
             return None
             
+    def return_bucketlist(self):
+        """
+        Append the loaded bucketlist back into the current user's bucketlists.
+        """
+        if self.current_user is not None:
+            if self.current_bucketlist is not None:
+                self.current_user.bucketlists.append(self.current_bucketlist)
+                return True
+        else:
+            return None
+            
     def edit_bucketlist(self, name, description):
         """
         Edit a Bucketlist using the strings name and description.
@@ -149,6 +160,22 @@ class BucketListApp:
                         return True
                 else:
                     return False
+        else:
+            return None
+            
+    def return_bucketlist_item(self):
+        """
+        Append the loaded bucketlist item back into the current user's
+        loaded bucketlist.
+        """
+        if self.current_user is not None:
+            if self.create_bucketlist is not None:
+                if self.current_bucketlist_item is not None:
+                    self.current_bucketlist.bucketlist_items.append(
+                            self.create_bucketlist_item)
+                    return True
+            else:
+                return False
         else:
             return None
             

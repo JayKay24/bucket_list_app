@@ -140,4 +140,5 @@ def edit_bucket_list(name, description):
         form = BucketListForm(obj=bucket_list_app.current_bucketlist)
     return render_template('edit_bucketlist.html', form=form, 
                            bucketlist=bucket_list_app.current_bucketlist)
+                                           
     
