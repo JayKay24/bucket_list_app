@@ -110,7 +110,7 @@ class BucketListApp:
         """
         if self.current_user is not None:
             if self.current_bucketlist is not None:
-                for i in range(len(self.current_bucketlist)):
+                for i in range(len(self.current_bucketlist.bucketlist_items)):
                     if (self.current_bucketlist.bucketlist_items[i].name == name
                     and self.current_bucketlist.bucketlist_items[i].description == description):
                         return False
