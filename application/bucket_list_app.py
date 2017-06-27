@@ -130,8 +130,9 @@ class BucketListApp:
                 for i in range(len(self.current_bucketlist.bucketlist_items)):
                     if (self.current_bucketlist.bucketlist_items[i].name == name
                     and self.current_bucketlist.bucketlist_items[i].description == description):
-                        del self.current_bucketlist.bucketlist_items.pop(i)
                         return True
+                else:
+                    return False
         else:
             return None
 
