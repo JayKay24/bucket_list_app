@@ -2,6 +2,7 @@
 This module defines a class LoginTest to test the login view function.
 """
 import unittest
+from application.bucket_list_app import BucketListApp
 from application.main import app
 
 class LoginTest(unittest.TestCase):
@@ -15,12 +16,13 @@ class LoginTest(unittest.TestCase):
     def tearDown(self):
         self.app = None
         
-    def login(self, email, password):
+    def test_login_view_returns_200_status_code(self):
         """
-        Helper method to log in the user.
+        Assert that the response status code returns 200.
         """
-        return self.app.post('/login', data=dict(
-        email=email, password=password), follow_redirects=True)
+        response = self.app.get('/login')
+        self.assertEqual(response.status_code, 200, 
+        "should return a status code of 200")
         
     def logout(self):
         """
@@ -28,16 +30,3 @@ class LoginTest(unittest.TestCase):
         """
         return self.app.get('/logout', follow_redirects=True)
         
-    def test_login(self):
-        """
-        Assert login message is in homepage.
-        """
-        response = self.login('james@gmail.com', 'pass')
-        assert b'You have been successfully logged in!' in response.data
-        
-    def test_login_invalid_credentials(self):
-        """
-        Assert login returns registration message.
-        """
-        response = self.login('jimmy@gmail.com', 'admin')
-        assert b'Please register with the application first' in response.data
