@@ -11,12 +11,6 @@ class UserTest(unittest.TestCase):
     def tearDown(self):
         self.user = None
     
-    def test_user_id_is_none(self):
-        """
-        Assert that the initial user_id is None.
-        """
-        self.assertIsNone(self.user.user_id, "user id should be none")
-    
     def test_password_is_correct(self):
         """
         Assert that the password is correct.

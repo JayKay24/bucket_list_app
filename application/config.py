@@ -3,6 +3,7 @@ This module contains the a class Configuration used to store the flask applicati
 instance configuration.
 """
 import os
+
 class Configuration(object): # Instruct Flask to run the application in DEBUG mode.
     """
     Class containing configuration for the flask application instance.
@@ -10,6 +11,4 @@ class Configuration(object): # Instruct Flask to run the application in DEBUG mo
     DEBUG = True,
     # A cryptographic random generator to set the SECRET key.
     SECRET_KEY = os.urandom(24)
-    EMAIL = ['james@gmail.com']
-    PASSWORD = ['pass']
     
