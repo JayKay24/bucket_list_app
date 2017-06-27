@@ -136,9 +136,32 @@ def edit_bucket_list(name, description):
             flash('Bucketlist has been successfully edited!', 'success')
             return redirect(url_for('show_all_bucketlists'))
     else:
-        bucket_list_app.current_user.bucketlists.append(bucket_list_app.current_bucketlist)
+        bucket_list_app.return_bucketlist()
         form = BucketListForm(obj=bucket_list_app.current_bucketlist)
     return render_template('edit_bucketlist.html', form=form, 
                            bucketlist=bucket_list_app.current_bucketlist)
-                                           
+                           
+@app.route('/create-bucketlist-item/<name>/<description>', methods=['GET', 'POST'])
+def create_bucketlist_item(name, description):
+    """
+    Create a bucketlist item in the application.
+    """
+    bucket_list_app.load_bucketlist_item(name, description)
+    if request.method == 'POST':
+        form = BucketListForm(request.form)
+        if form.validate():
+            name = form.name.data
+            description = form.description.data
+            
+            response = bucket_list_app.create_bucketlist_item(name, description)
+            if response is True:
+                flash('Bucketlist item was successfully created!', 'success')
+            elif response is False:
+                flash('Bucketlist item already exists!', 'success')
+            return redirect(url_for('show_all_bucketlist_items', 
+                    bucketlist=bucket_list_app.current_bucketlist))
+    else:
+        form = BucketListForm()
+    return render_template('show_all_bucketlist_items.html', form=form, 
+                           bucketlist=bucket_list_app.create_bucketlist)
     
