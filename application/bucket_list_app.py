@@ -120,4 +120,18 @@ class BucketListApp:
                 return True
         else:
             return None
+            
+    def delete_bucketlist_item(self, name, description):
+        """
+        Delete a bucketlist item using the strings name and description.
+        """
+        if self.current_user is not None:
+            if self.current_bucketlist is not None:
+                for i in range(len(self.current_bucketlist.bucketlist_items)):
+                    if (self.current_bucketlist.bucketlist_items[i].name == name
+                    and self.current_bucketlist.bucketlist_items[i].description == description):
+                        del self.current_bucketlist.bucketlist_items.pop(i)
+                        return True
+        else:
+            return None
 
