@@ -162,6 +162,6 @@ def create_bucketlist_item(name, description):
                     bucketlist=bucket_list_app.current_bucketlist))
     else:
         form = BucketListForm()
-    return render_template('show_all_bucketlist_items.html', form=form, 
+    return render_template('create_bucketlist_item.html', form=form, 
                            bucketlist=bucket_list_app.create_bucketlist)
     
