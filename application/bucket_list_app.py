@@ -96,6 +96,7 @@ class BucketListApp:
         if self.current_user is not None:
             if self.current_bucketlist is not None:
                 self.current_user.bucketlists.append(self.current_bucketlist)
+                self.current_bucketlist = None
                 return True
         else:
             return None
@@ -173,6 +174,7 @@ class BucketListApp:
                 if self.current_bucketlist_item is not None:
                     self.current_bucketlist.bucketlist_items.append(
                             self.create_bucketlist_item)
+                    self.current_bucketlist_item = None
                     return True
             else:
                 return False
