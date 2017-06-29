@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Show Bucketlist Items{% endblock %}
+{% block content_title %}All Bucketlist Items{% endblock %}
+{% block content %}
+    <hr />
+        {% for bucketlist_item in bucketlist_items %}
+            <p>
+                <h5>{{ bucketlist_item.name }}</h5>
+                <br />
+                {{ bucketlist_item.description }}
+                <br />
+            </p>
+            <hr />
+        {% endfor %}
+{% endblock %}

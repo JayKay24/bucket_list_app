@@ -3,7 +3,7 @@
 {% block title %}Create Bucketlist Item{% endblock %}
 {% block content_title %}Create Bucketlist Item{% endblock %}
 {% block content %}
-<form action="{{ url_for('create_bucket_list') }}" class="form form-horizontal" method="post">
+<form action="{{ url_for('create_bucketlist_item', name=bucketlist.name, description=bucketlist.description) }}" class="form form-horizontal" method="post">
     {{ form_field(form.name) }}
     {{ form_field(form.description) }}
     <div class="form-group">

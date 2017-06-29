@@ -146,7 +146,7 @@ def create_bucketlist_item(name, description):
     """
     Create a bucketlist item in the application.
     """
-    bucket_list_app.load_bucketlist_item(name, description)
+    bucket_list_app.load_bucketlist(name, description)
     if request.method == 'POST':
         form = BucketListForm(request.form)
         if form.validate():
@@ -161,7 +161,16 @@ def create_bucketlist_item(name, description):
             return redirect(url_for('show_all_bucketlist_items', 
                     bucketlist=bucket_list_app.current_bucketlist))
     else:
+        bucket_list_app.return_bucketlist()
         form = BucketListForm()
     return render_template('create_bucketlist_item.html', form=form, 
-                           bucketlist=bucket_list_app.create_bucketlist)
+                           bucketlist=bucket_list_app.current_bucketlist)
+                           
+@app.route('/show_all_bucketlist_items')
+def show_all_bucketlist_items():
+    """
+    Show all the bucketist items in a bucketlist.
+    """
+    return render_template('show_bucketlist_items.html', 
+                           bucketlist_items=bucket_list_app.current_bucketlist.bucketlist_items)
     
