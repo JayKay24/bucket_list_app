@@ -50,17 +50,12 @@ class BucketListApp:
         """
         Delete a bucketlist using the strings name and description.
         """
-        if self.current_user is not None:
-            for i in range(len(self.current_user.bucketlists)):
-                if (self.current_user.bucketlists[i].name == name and 
-                self.current_user.bucketlists[i].description == description):
-                    del self.current_user.bucketlists[i]
-                    return True
-            else:
-                # The bucketlist was not found.
-                return False
-        else:
-            return None
+        for name, user in self.users.items():
+            if user.current is True:
+                for bucketlist_name, bucketlist in user.bucketlists.items():
+                    if (name+description) == bucketlist_name:
+                        user.bucketlists.pop(bucketlist_name, None)
+                        return True
             
     def load_bucketlist(self, name, description):
         """
