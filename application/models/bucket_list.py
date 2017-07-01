@@ -8,3 +8,9 @@ class BucketList:
         self.user= user
         self.current = False
         self.bucketlist_items = {}
+        
+    def get_full_name(self):
+        """
+        Concatenate the name and description of this object.
+        """
+        return self.name + self.description
