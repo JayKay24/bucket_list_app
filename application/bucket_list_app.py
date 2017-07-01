@@ -61,16 +61,10 @@ class BucketListApp:
         """
         Load the current bucketlist for editing.
         """
-        if self.current_user is not None:
-            for i in range(len(self.current_user.bucketlists)):
-                if (self.current_user.bucketlists[i].name == name and 
-                self.current_user.bucketlists[i].description == description):
-                    self.current_bucketlist = self.current_user.bucketlists.pop(i)
-                    return True
-            else:
-                return False
-        else:
-            return None
+        for name, user in self.users.items():
+            for bucketlist_name, bucketlist in user.bucketlists.items():
+                if (name+description) == bucketlist_name:
+                    bucketlist.current = True
             
     def return_bucketlist(self):
         """
