@@ -8,8 +8,9 @@ class User:
         self.lname = last_name
         self.email = email
         self.password = password
-        # Store the user's bucketlists in a list.
-        self.bucketlists = []
+        # Store the user's bucketlists in a dictionary.
+        self.bucketlists = {}
+        self.current = False
         
     def get_full_name(self):
         """

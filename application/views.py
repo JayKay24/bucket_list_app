@@ -84,6 +84,7 @@ def show_all_bucketlists():
     """
     Display all bucket lists.
     """
+    bucket_list_app.return_bucketlist()
     return render_template('show_bucketlists.html', 
                 all_bucketlists=bucket_list_app.current_user.bucketlists)
                            
@@ -159,7 +160,7 @@ def create_bucketlist_item(name, description):
             elif response is False:
                 flash('Bucketlist item already exists!', 'success')
             return redirect(url_for('show_all_bucketlist_items', 
-                    bucketlist=bucket_list_app.current_bucketlist))
+        bucketlist_items=bucket_list_app.current_bucketlist.bucketlist_items))
     else:
         bucket_list_app.return_bucketlist()
         form = BucketListForm()
@@ -172,5 +173,5 @@ def show_all_bucketlist_items():
     Show all the bucketist items in a bucketlist.
     """
     return render_template('show_bucketlist_items.html', 
-                           bucketlist_items=bucket_list_app.current_bucketlist.bucketlist_items)
+        bucketlist_items=bucket_list_app.current_bucketlist.bucketlist_items)
     
