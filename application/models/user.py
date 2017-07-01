@@ -12,8 +12,8 @@ class User:
         self.bucketlists = {}
         self.current = False
         
-    def get_full_name(self):
+    def get_credentials(self):
         """
         Return the user's full name.
         """
-        return self.fname + self.lname
+        return self.email + self.password
