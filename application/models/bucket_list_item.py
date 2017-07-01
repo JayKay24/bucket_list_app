@@ -1,5 +1,5 @@
 class BucketListItem:
-    def __init__(self, name=None, description=None, bucketlist=None):
+    def __init__(self, name=None, description=None):
         self.name = name
         self.description = description
-        self.bucketlist = bucketlist        
+        self.current = False
