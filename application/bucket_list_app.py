@@ -27,16 +27,11 @@ class BucketListApp:
         """
         Load the current user into the application upon logging in.
         """
-        value = None
-        for i in range(len(self.users)):
-            if (self.users[i].email == email and 
-            self.users[i].password == password):
-                self.current_user = self.users.pop(i)
-                value = True
-                break
-        else:
-            value = False
-        return value
+        for name, user in self.users.items():
+            if (email+password) == user.get_credentials():
+                user.current = True
+                return True
+        return False
         
     def create_bucketlist(self, name, description):
         """
