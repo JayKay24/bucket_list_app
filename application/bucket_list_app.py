@@ -10,7 +10,7 @@ class BucketListApp:
     Controller class to manipulate class models.
     """
     def __init__(self):
-        self.users = []
+        self.users = {}
         self.current_user = None
         self.current_bucketlist = None
         self.current_bucketlist_item = None
