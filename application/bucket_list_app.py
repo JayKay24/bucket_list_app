@@ -87,16 +87,15 @@ class BucketListApp:
         """
         Edit a Bucketlist using the strings name and description.
         """
-        if self.current_user is not None:
-            if self.current_bucketlist is not None:
-                self.current_bucketlist.name = name
-                self.current_bucketlist.description = description
-                self.current_user.bucketlists.append(self.current_bucketlist)
-                return True
-            else:
-                return False
-        else:
-            return None
+        for name, user in self.users.items():
+            if user.current is True:
+                for bucketlist_name, bucketlist in user.bucketlists.items():
+                    if bucketlist.current is True:
+                        bucketlist.name = name
+                        bucketlist.description = description
+                        return True
+                else:
+                    return False
             
     def create_bucketlist_item(self, name, description):
         """
