@@ -6,5 +6,5 @@ class BucketList:
         self.name = name
         self.description = description
         self.user= user
+        self.current = False
         self.bucketlist_items = {}
-    
