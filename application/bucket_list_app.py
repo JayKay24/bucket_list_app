@@ -16,12 +16,13 @@ class BucketListApp:
         """
         Create a user upon registration.
         """
-        for user in self.users:
-            if (user.email == email and user.password == password or
-            user.fname == fname and user.lname == lname):
-                return False
-        user = User(fname, lname, email, password)
-        self.users.append(user)
+        if len(self.users) >=1:
+            for name, user in self.users.items():
+                if (email+password) == name:
+                    return False
+            # The user is unique.
+            user = User(fname, lname, email, password)
+            self.users[user.get_credentials] = user
         return True
         
     def load_user(self, email, password):
