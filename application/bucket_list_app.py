@@ -33,6 +33,14 @@ class BucketListApp:
                 return True
         return False
         
+    def return_user(self):
+        """
+        Reset the current attribute of User class to False.
+        """
+        for name, user in self.users.items():
+            if user.current is True:
+                user.current = False
+        
     def create_bucketlist(self, name, description):
         """
         Create a bucketlist using the strings name and description.
