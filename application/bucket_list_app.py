@@ -11,9 +11,6 @@ class BucketListApp:
     """
     def __init__(self):
         self.users = {}
-        self.current_user = None
-        self.current_bucketlist = None
-        self.current_bucketlist_item = None
         
     def create_user(self, fname, lname, email, password):
         """
