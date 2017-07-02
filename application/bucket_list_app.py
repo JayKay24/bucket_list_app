@@ -40,6 +40,7 @@ class BucketListApp:
         for name, user in self.users.items():
             if user.current is True:
                 user.current = False
+                return True
         
     def create_bucketlist(self, name, description):
         """
@@ -73,6 +74,7 @@ class BucketListApp:
             for bucketlist_name, bucketlist in user.bucketlists.items():
                 if (name+description) == bucketlist_name:
                     bucketlist.current = True
+                    return True
             
     def return_bucketlist(self):
         """
@@ -82,6 +84,7 @@ class BucketListApp:
             for bucketlist_name, bucketlist in user.bucketlists.items():
                 if bucketlist.current is True:
                     bucketlist.current = False
+                    return True
                     
     def rename_dictionary(self, a_dictionary):
         """
@@ -142,15 +145,14 @@ class BucketListApp:
         """
         Load the current bucketlist item for editing.
         """
-        if self.current_user is not None:
-            if self.current_bucketlist is not None:
-                for i in range(len(self.current_bucketlist.bucketlist_items)):
-                    if (self.current_bucketlist.bucketlist_items[i].name == name
-                    and self.current_bucketlist.bucketlist_items[i].description == description):
-                        self.current_bucketlist_item = self.current_bucketlist.bucketlist_items.pop(i)
-                        return True
-                else:
-                    return False
+        for name, user in self.users.items():
+            if user.current is True:
+                for bucketlist_name, bucketlist in user.bucketlists.items():
+                    if bucketlist.current is True:
+                        for bucketitem_name, bucketitem in bucketlist.bucketlist_items.items():
+                            if (name+description) == bucketitem_name:
+                                bucketitem.current = True
+                                return True
         else:
             return None
             
