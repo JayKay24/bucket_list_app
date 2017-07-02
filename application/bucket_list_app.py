@@ -15,8 +15,8 @@ class BucketListApp:
         Create a user upon registration.
         """
         if len(self.users) >=1:
-            for name, user in self.users.items():
-                if (email+password) == name:
+            for username, user in self.users.items():
+                if (email+password) == username:
                     return False
         # The user is unique.
         user = User(fname, lname, email, password)
@@ -28,8 +28,8 @@ class BucketListApp:
         """
         Load the current user into the application upon logging in.
         """
-        for name, user in self.users.items():
-            if (email+password) == name:
+        for username, user in self.users.items():
+            if (email+password) == username:
                 user.current = True
                 return True
         
@@ -37,7 +37,7 @@ class BucketListApp:
         """
         Reset the current attribute of User class to False.
         """
-        for name, user in self.users.items():
+        for username, user in self.users.items():
             user.rename_bucketlist_keys()
             if user.current is True:
                 user.current = False
@@ -47,10 +47,10 @@ class BucketListApp:
         """
         Create a bucketlist using the strings name and description.
         """
-        for name, user in self.users.items():
+        for username, user in self.users.items():
             user.rename_bucketlist_keys()
             if user.current is True:
-                for bucketlist_name, bucketlist in self.users.bucketlists.items():
+                for bucketlist_name, bucketlist in user.bucketlists.items():
                     if (name+description) == bucketlist_name:
                         return False
                 user.bucketlists[name+description] = BucketList(name, 
@@ -61,7 +61,7 @@ class BucketListApp:
         """
         Delete a bucketlist using the strings name and description.
         """
-        for name, user in self.users.items():
+        for username, user in self.users.items():
             user.rename_bucketlist_keys()
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
@@ -73,7 +73,7 @@ class BucketListApp:
         """
         Load the current bucketlist for editing.
         """
-        for name, user in self.users.items():
+        for username, user in self.users.items():
             user.rename_bucketlist_keys()
             for bucketlist_name, bucketlist in user.bucketlists.items():
                 if (name+description) == bucketlist_name:
@@ -84,7 +84,7 @@ class BucketListApp:
         """
         Reset the loaded bucketlist's current attribute to False.
         """
-        for name, user in self.users.items():
+        for username, user in self.users.items():
             user.rename_bucketlist_keys()
             for bucketlist_name, bucketlist in user.bucketlists.items():
                 if bucketlist.current is True:
@@ -105,7 +105,7 @@ class BucketListApp:
         """
         Edit a Bucketlist using the strings name and description.
         """
-        for name, user in self.users.items():
+        for username, user in self.users.items():
             user.rename_bucketlist_keys()
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
@@ -120,7 +120,7 @@ class BucketListApp:
         """
         Create a bucketlist item using the strings name and description.
         """
-        for name, user in self.users.items():
+        for username, user in self.users.items():
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
                     bucketlist.rename_bucketlist_item_keys()
@@ -135,7 +135,7 @@ class BucketListApp:
         """
         Delete a bucketlist item using the strings name and description.
         """
-        for name, user in self.users.items():
+        for username, user in self.users.items():
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
                     bucketlist.rename_bucketlist_item_keys()
@@ -153,7 +153,7 @@ class BucketListApp:
         """
         Load the current bucketlist item for editing.
         """
-        for name, user in self.users.items():
+        for username, user in self.users.items():
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
                     bucketlist.rename_bucketlist_item_keys()
@@ -169,7 +169,7 @@ class BucketListApp:
         """
         Reset the loaded bucketlist item's current attriibute to False.
         """
-        for name, user in self.users.items():
+        for username, user in self.users.items():
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
                     bucketlist.rename_bucketlist_item_keys()
@@ -183,7 +183,7 @@ class BucketListApp:
         """
         Edit a bucketlist using the strings name and description.
         """
-        for name, user in self.users.items():
+        for username, user in self.users.items():
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
                     bucketlist.rename_bucketlist_item_keys()
