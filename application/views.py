@@ -33,6 +33,10 @@ def register():
             password = form.password.data
             reenter_password = form.reenter_password.data
             
+            if password != reenter_password:
+                flash('Please enter a matching password!', 'danger')
+                return redirect(url_for('register'))
+            
             response = bucket_list_app.create_user(first_name, last_name, 
                                                    email, password)
             if response is True:
@@ -56,7 +60,6 @@ def login():
             password = form.password.data
             
             response = bucket_list_app.load_user(email, password)
-            print(response)
             if response is True:
                 flash('You have been successfully logged in!', 'success')
                 session['logged_in'] = True
