@@ -158,20 +158,16 @@ class BucketListApp:
             
     def return_bucketlist_item(self):
         """
-        Append the loaded bucketlist item back into the current user's
-        loaded bucketlist.
+        Reset the loaded bucketlist item's current attriibute to False.
         """
-        if self.current_user is not None:
-            if self.create_bucketlist is not None:
-                if self.current_bucketlist_item is not None:
-                    self.current_bucketlist.bucketlist_items.append(
-                            self.create_bucketlist_item)
-                    self.current_bucketlist_item = None
-                    return True
-            else:
-                return False
-        else:
-            return None
+        for name, user in self.users.items():
+            if user.current is True:
+                for bucketlist_name, bucketlist in user.bucketlists.items():
+                    if bucketlist.current is True:
+                        for bucketitem_name, bucketitem in bucketlist.bucketlist_items.items():
+                            if bucketitem.current is True:
+                                bucketitem.current = False
+                                return True
             
     def edit_bucketlist_item(self, name, description):
         """
