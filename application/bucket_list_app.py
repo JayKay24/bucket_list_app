@@ -18,9 +18,10 @@ class BucketListApp:
             for name, user in self.users.items():
                 if (email+password) == name:
                     return False
-            # The user is unique.
-            user = User(fname, lname, email, password)
-            self.users[user.get_credentials] = user
+        # The user is unique.
+        user = User(fname, lname, email, password)
+        self.users[user.get_credentials()] = user
+        print(self.users)
         return True
         
     def load_user(self, email, password):
@@ -28,16 +29,16 @@ class BucketListApp:
         Load the current user into the application upon logging in.
         """
         for name, user in self.users.items():
-            if (email+password) == user.get_credentials():
+            if (email+password) == name:
                 user.current = True
                 return True
-        return False
         
     def return_user(self):
         """
         Reset the current attribute of User class to False.
         """
         for name, user in self.users.items():
+            user.rename_bucketlist_keys()
             if user.current is True:
                 user.current = False
                 return True
@@ -47,6 +48,7 @@ class BucketListApp:
         Create a bucketlist using the strings name and description.
         """
         for name, user in self.users.items():
+            user.rename_bucketlist_keys()
             if user.current is True:
                 for bucketlist_name, bucketlist in self.users.bucketlists.items():
                     if (name+description) == bucketlist_name:
@@ -60,6 +62,7 @@ class BucketListApp:
         Delete a bucketlist using the strings name and description.
         """
         for name, user in self.users.items():
+            user.rename_bucketlist_keys()
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
                     if (name+description) == bucketlist_name:
@@ -71,6 +74,7 @@ class BucketListApp:
         Load the current bucketlist for editing.
         """
         for name, user in self.users.items():
+            user.rename_bucketlist_keys()
             for bucketlist_name, bucketlist in user.bucketlists.items():
                 if (name+description) == bucketlist_name:
                     bucketlist.current = True
@@ -81,6 +85,7 @@ class BucketListApp:
         Reset the loaded bucketlist's current attribute to False.
         """
         for name, user in self.users.items():
+            user.rename_bucketlist_keys()
             for bucketlist_name, bucketlist in user.bucketlists.items():
                 if bucketlist.current is True:
                     bucketlist.current = False
@@ -101,6 +106,7 @@ class BucketListApp:
         Edit a Bucketlist using the strings name and description.
         """
         for name, user in self.users.items():
+            user.rename_bucketlist_keys()
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
                     if bucketlist.current is True:
@@ -117,6 +123,7 @@ class BucketListApp:
         for name, user in self.users.items():
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
+                    bucketlist.rename_bucketlist_item_keys()
                     if bucketlist.current is True:
                         bucketlist_item = BucketListItem(name, description)
                         bucketlist[bucketlist_item.get_full_name()] = bucketlist_item
@@ -131,6 +138,7 @@ class BucketListApp:
         for name, user in self.users.items():
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
+                    bucketlist.rename_bucketlist_item_keys()
                     if bucketlist.current is True:
                         for bucketitem_name, bucketitem in bucketlist.bucketlist_items.items():
                             if (name+description) == bucketitem_name:
@@ -148,6 +156,7 @@ class BucketListApp:
         for name, user in self.users.items():
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
+                    bucketlist.rename_bucketlist_item_keys()
                     if bucketlist.current is True:
                         for bucketitem_name, bucketitem in bucketlist.bucketlist_items.items():
                             if (name+description) == bucketitem_name:
@@ -163,6 +172,7 @@ class BucketListApp:
         for name, user in self.users.items():
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
+                    bucketlist.rename_bucketlist_item_keys()
                     if bucketlist.current is True:
                         for bucketitem_name, bucketitem in bucketlist.bucketlist_items.items():
                             if bucketitem.current is True:
@@ -176,6 +186,7 @@ class BucketListApp:
         for name, user in self.users.items():
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
+                    bucketlist.rename_bucketlist_item_keys()
                     if bucketlist.current is True:
                         for bucketitem_name, bucketitem in bucketlist.bucketlist_items.items():
                             if bucketitem.current is True:

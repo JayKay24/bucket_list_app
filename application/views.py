@@ -78,7 +78,7 @@ def logout():
     Return the user back to the homepage.
     """
     session.pop('logged_in', None)
-    bucket_list_app.users.append(bucket_list_app.current_user)
+    bucket_list_app.return_user()
     flash('You were logged out', 'success')
     return redirect(url_for('homepage'))
     
