@@ -123,10 +123,16 @@ def delete_bucketlist(name, description):
     Delete a bucketlist in the application.
     """
     response = bucket_list_app.delete_bucketlist(name, description)
+    
+    bucketlists = None
+    for username, user in bucket_list_app.users.items():
+        if user.current is True:
+            bucketlists = user.bucketlists.values()
+            break
     if response is True:
         flash('Bucketlist successfully deleted!', 'success')
         return redirect(url_for('show_all_bucketlists', 
-                    all_bucketlists=bucket_list_app.current_user.bucketlists))
+                    all_bucketlists=bucketlists))
                                     
 @app.route('/edit-bucketlist/<name>/<description>', methods=['GET', 'POST'])
 def edit_bucket_list(name, description):
