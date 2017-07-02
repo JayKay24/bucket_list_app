@@ -91,7 +91,7 @@ def show_all_bucketlists():
     bucketlists = None
     for username, user in bucket_list_app.users.items():
         if user.current is True:
-            bucketlists = user.bucketlists.values()
+            bucketlists = list(user.bucketlists.values())
             break
     return render_template('show_bucketlists.html', 
                 all_bucketlists=bucketlists)
