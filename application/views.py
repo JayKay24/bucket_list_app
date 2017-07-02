@@ -89,7 +89,7 @@ def show_all_bucketlists():
     Display all bucket lists.
     """
     bucketlists = None
-    for name, user in bucket_list_app.users.items():
+    for username, user in bucket_list_app.users.items():
         if user.current is True:
             bucketlists = user.bucketlists.values()
             break

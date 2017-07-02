@@ -5,14 +5,12 @@
     <hr />
         {% for bucket_list in all_bucketlists %}
             <p>
-                <br />
                 <h3>Name</h3>
-                <br />
                 {{ bucket_list.name }}
                 <br />
                 <h3>Description</h3>
-                <br />
                 {{ bucket_list.description }}
+                <br />
                 <br />
                 <a href="{{ url_for('create_bucketlist_item', name=bucket_list.name, description=bucket_list.description) }}">
                     <button class="btn btn-default">Create Bucketlist Item</button>
