@@ -134,9 +134,17 @@ def edit_bucket_list(name, description):
     Edit a bucketlist in the application.
     """
     bucket_list_app.load_bucketlist(name, description)
+    current_bucketlist = None
+    for username, user in bucket_list_app.users.items():
+        if user.current is True:
+            for bucketlist_name, bucketlist in user.bucketlists.items():
+                if bucketlist.current is True:
+                    current_bucketlist = bucketlist
+                    break
+                
     if request.method == 'POST':
         form = BucketListForm(request.form, 
-                              obj=bucket_list_app.current_bucketlist)
+                              obj=current_bucketlist)
         if form.validate():
             name = form.name.data
             description = form.description.data
@@ -146,9 +154,9 @@ def edit_bucket_list(name, description):
             return redirect(url_for('show_all_bucketlists'))
     else:
         bucket_list_app.return_bucketlist()
-        form = BucketListForm(obj=bucket_list_app.current_bucketlist)
+        form = BucketListForm(obj=current_bucketlist)
     return render_template('edit_bucketlist.html', form=form, 
-                           bucketlist=bucket_list_app.current_bucketlist)
+                           bucketlist=current_bucketlist)
                            
 @app.route('/create-bucketlist-item/<name>/<description>', methods=['GET', 'POST'])
 def create_bucketlist_item(name, description):
