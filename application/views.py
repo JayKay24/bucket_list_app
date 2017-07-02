@@ -158,6 +158,11 @@ def edit_bucket_list(name, description):
     return render_template('edit_bucketlist.html', form=form, 
                            bucketlist=current_bucketlist)
                            
+@app.route('/load-bucketlist/<name>/<description>')
+def load_bucketlist(name, description):
+    bucket_list_app.load_bucketlist(name, description)
+    return redirect(url_for('show_all_bucketlist_items'))
+                           
 @app.route('/show_all_bucketlist_items')
 def show_all_bucketlist_items():
     """
