@@ -5,6 +5,28 @@
     <hr />
         {% for bucket_list in all_bucketlists %}
             <p>
+                <div class="modal fade" id="deleteBucketlist">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <!--Modal Header-->
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Delete Bucketlist</h4>
+                                <!--Modal Body-->
+                                <div class="modal-body">
+                                    <h1>Are you sure you want to delete {{ bucket_list.name }}?</h1>
+                                </div>
+                                <!--Modal Footer-->
+                                <div class="modal-footer">
+                                    <a href="{{ url_for('delete_bucketlist', name=bucket_list.name, description=bucket_list.description) }}">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Delete</button>
+                                    </a>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <h3>Name</h3>
                 {{ bucket_list.name }}
                 <br />
@@ -15,9 +37,7 @@
                 <a href="{{ url_for('create_bucketlist_item', name=bucket_list.name, description=bucket_list.description) }}">
                     <button class="btn btn-default">Create Bucketlist Item</button>
                 </a>
-                <a href="{{ url_for('delete_bucketlist', name=bucket_list.name, description=bucket_list.description) }}">
-                    <button class="btn btn-default">Delete</button>
-                </a>
+                <button class="btn btn-default" data-toggle="modal" data-target="deleteBucketlist">Delete</button>
                 <a href="{{ url_for('edit_bucket_list', name=bucket_list.name, description=bucket_list.description) }}">
                     <button class="btn btn-default">Edit</button>
                 </a>
