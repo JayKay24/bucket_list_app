@@ -31,6 +31,7 @@ def register():
             last_name = form.last_name.data
             email = form.email.data
             password = form.password.data
+            reenter_password = form.reenter_password.data
             
             response = bucket_list_app.create_user(first_name, last_name, 
                                                    email, password)
