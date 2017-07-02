@@ -21,7 +21,6 @@ class BucketListApp:
         # The user is unique.
         user = User(fname, lname, email, password)
         self.users[user.get_credentials()] = user
-        print(self.users)
         return True
         
     def load_user(self, email, password):
@@ -55,6 +54,7 @@ class BucketListApp:
                         return False
                 user.bucketlists[name+description] = BucketList(name, 
                                                 description)
+                print(user.bucketlists)
                 return True
         
     def delete_bucketlist(self, name, description):
@@ -63,11 +63,16 @@ class BucketListApp:
         """
         for username, user in self.users.items():
             user.rename_bucketlist_keys()
+            print(user.bucketlists)
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
+                    print(bucketlist_name)
                     if (name+description) == bucketlist_name:
                         user.bucketlists.pop(bucketlist_name, None)
+                        print(user.bucketlists)
                         return True
+                else:
+                    return False
             
     def load_bucketlist(self, name, description):
         """

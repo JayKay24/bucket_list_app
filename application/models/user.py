@@ -22,7 +22,7 @@ class User:
         """
         Reset the keys of a bucketlists dictionary to new names.
         """
-        all_values = self.bucketlists.values()
+        all_values = list(self.bucketlists.values())
         self.bucketlists.clear()
         for value in all_values:
             self.bucketlists[value.get_full_name()] = value
