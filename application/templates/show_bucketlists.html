@@ -6,7 +6,7 @@
         {% for bucket_list in all_bucketlists %}
             <p>
                 <h3>Name</h3>
-                {{ bucket_list.name }}
+                <a href="{{ url_for('load_bucketlist', name=bucket_list.name, description=bucket_list.description) }}">{{ bucket_list.name }}</a>
                 <br />
                 <h3>Description</h3>
                 {{ bucket_list.description }}
