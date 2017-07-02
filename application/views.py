@@ -88,9 +88,13 @@ def show_all_bucketlists():
     """
     Display all bucket lists.
     """
-    bucket_list_app.return_bucketlist()
+    bucketlists = None
+    for name, user in bucket_list_app.users.items():
+        if user.current is True:
+            bucketlists = user.bucketlists.values()
+            break
     return render_template('show_bucketlists.html', 
-                all_bucketlists=bucket_list_app.current_user.bucketlists)
+                all_bucketlists=bucketlists)
                            
 @app.route('/create-bucketlist', methods=['GET', 'POST'])
 def create_bucket_list():
