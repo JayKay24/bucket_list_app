@@ -21,7 +21,7 @@ class RegistrationForm(wtforms.Form):
     password = wtforms.PasswordField("Password",
                                 validators=[validators.DataRequired()])
                                 
-    reenter_password = wtforms.PasswordField("Rename Password",
+    reenter_password = wtforms.PasswordField("Re-enter Password",
                                 validators=[validators.DataRequired()])
                                 
                                 
