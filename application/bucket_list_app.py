@@ -82,6 +82,16 @@ class BucketListApp:
             for bucketlist_name, bucketlist in user.bucketlists.items():
                 if bucketlist.current is True:
                     bucketlist.current = False
+                    
+    def rename_dictionary(self, a_dictionary):
+        """
+        Reset the keys of an arbitrary dictionary to new names.
+        """
+        all_values = a_dictionary.values()
+        a_dictionary.clear()
+        for value in all_values:
+            a_dictionary[value.get_full_name()] = value
+        return a_dictionary
             
     def edit_bucketlist(self, name, description):
         """
