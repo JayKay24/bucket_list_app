@@ -3,7 +3,7 @@ This module defines the routes to be used by the flask application instance.
 """
 from flask import render_template, redirect, request, url_for, flash, session
 
-from bucket_list_app import BucketListApp, all_users, all_bucketlists
+from bucket_list_app import BucketListApp
 from forms import RegistrationForm, LoginForm, BucketListForm
 from models.bucket_list import BucketList
 
