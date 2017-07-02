@@ -134,7 +134,7 @@ class BucketListApp:
                     if bucketlist.current is True:
                         for bucketitem_name, bucketitem in bucketlist.bucketlist_items.items():
                             if (name+description) == bucketitem_name:
-                                bucketlist.pop(bucketitem_name)
+                                bucketlist.pop(bucketitem_name, None)
                                 return True
                         else:
                             return False
@@ -173,15 +173,16 @@ class BucketListApp:
         """
         Edit a bucketlist using the strings name and description.
         """
-        if self.current_user is not None:
-            if self.current_bucketlist is not None:
-                if self.current_bucketlist_item is not None:
-                    self.current_bucketlist_item.name = name
-                    self.current_bucketlist_item.description = description
-                    self.current_bucketlist.bucketlist_items.append(self.current_bucketlist_item)
-                    return True
-                else:
-                    return False
-        else:
-            return None
+        for name, user in self.users.items():
+            if user.current is True:
+                for bucketlist_name, bucketlist in user.bucketlists.items():
+                    if bucketlist.current is True:
+                        for bucketitem_name, bucketitem in bucketlist.bucketlist_items.items():
+                            if bucketitem.current is True:
+                                bucketitem.name = name
+                                bucketitem.description = description
+                                return True
+                        else:
+                            return False
+        
 
