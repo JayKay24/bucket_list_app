@@ -17,3 +17,13 @@ class User:
         Return the user's full name.
         """
         return self.email + self.password
+        
+    def rename_bucketlist_keys(self):
+        """
+        Reset the keys of a bucketlists dictionary to new names.
+        """
+        all_values = self.bucketlists.values()
+        self.bucketlists.clear()
+        for value in all_values:
+            self.bucketlists[value.get_full_name()] = value
+        
