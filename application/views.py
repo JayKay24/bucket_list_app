@@ -158,6 +158,22 @@ def edit_bucket_list(name, description):
     return render_template('edit_bucketlist.html', form=form, 
                            bucketlist=current_bucketlist)
                            
+@app.route('/show_all_bucketlist_items')
+def show_all_bucketlist_items():
+    """
+    Show all the bucketist items in a bucketlist.
+    """
+    bucketlist_items = None
+    for username, user in bucket_list_app.users.items():
+        if user.current is True:
+            for bucketlist_name, bucketlist in user.bucketlists.items():
+                if bucketlist.current is True:
+                    bucketlist_items = list(bucketlist.bucketlist_items.values())
+                    break
+                
+    return render_template('show_bucketlist_items.html', 
+        bucketlist_items=bucketlist_items)
+                           
 @app.route('/create-bucketlist-item/<name>/<description>', methods=['GET', 'POST'])
 def create_bucketlist_item(name, description):
     """
@@ -183,11 +199,4 @@ def create_bucketlist_item(name, description):
     return render_template('create_bucketlist_item.html', form=form, 
                            bucketlist=bucket_list_app.current_bucketlist)
                            
-@app.route('/show_all_bucketlist_items')
-def show_all_bucketlist_items():
-    """
-    Show all the bucketist items in a bucketlist.
-    """
-    return render_template('show_bucketlist_items.html', 
-        bucketlist_items=bucket_list_app.current_bucketlist.bucketlist_items)
     

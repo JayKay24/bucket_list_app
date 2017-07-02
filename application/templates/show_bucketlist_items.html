@@ -5,9 +5,12 @@
     <hr />
         {% for bucketlist_item in bucketlist_items %}
             <p>
-                <h5>{{ bucketlist_item.name }}</h5>
+                <h3>Name</h3>
+                {{ bucketlist_item.name }}
                 <br />
+                <h3>Description</h3>
                 {{ bucketlist_item.description }}
+                <br />
                 <br />
             </p>
             <hr />
