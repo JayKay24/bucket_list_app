@@ -27,10 +27,11 @@ class BucketListApp:
         """
         Load the current user into the application upon logging in.
         """
-        for username, user in self.users.items():
-            if (email+password) == username:
-                user.current = True
-                return True
+        if len(self.users) > 0:
+            for username, user in self.users.items():
+                if (email+password) == username:
+                    user.current = True
+                    return True
         
     def return_user(self):
         """
