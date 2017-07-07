@@ -185,6 +185,14 @@ def create_bucketlist_item(name, description):
     Create a bucketlist item in the application.
     """
     bucket_list_app.load_bucketlist(name, description)
+    current_bucketlist = None
+    for username, user in bucket_list_app.users.items():
+        if user.current is True:
+            for bucketlist_name, bucketlist in user.bucketlists.items():
+                if bucketlist.current is True:
+                    current_bucketlist = bucketlist
+                    break
+                
     if request.method == 'POST':
         form = BucketListForm(request.form)
         if form.validate():
@@ -196,12 +204,11 @@ def create_bucketlist_item(name, description):
                 flash('Bucketlist item was successfully created!', 'success')
             elif response is False:
                 flash('Bucketlist item already exists!', 'success')
-            return redirect(url_for('show_all_bucketlist_items', 
-        bucketlist_items=bucket_list_app.current_bucketlist.bucketlist_items))
+            return redirect(url_for('show_all_bucketlist_items'))
     else:
         bucket_list_app.return_bucketlist()
         form = BucketListForm()
     return render_template('create_bucketlist_item.html', form=form, 
-                           bucketlist=bucket_list_app.current_bucketlist)
+                           bucketlist=current_bucketlist)
                            
     

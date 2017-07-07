@@ -158,6 +158,7 @@ class BucketListApp:
         """
         Load the current bucketlist item for editing.
         """
+        self.return_bucketlist_item()
         for username, user in self.users.items():
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
@@ -197,6 +198,7 @@ class BucketListApp:
                             if bucketitem.current is True:
                                 bucketitem.name = name
                                 bucketitem.description = description
+                                self.return_bucketlist_item()
                                 return True
                         else:
                             return False
