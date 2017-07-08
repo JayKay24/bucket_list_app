@@ -2,11 +2,11 @@
 {% block title %}Delete Bucketlist Item{% endblock %}
 {% block content_title %}Delete Bucketlist Item{% endblock %}
 {% block content %}
-    Are you sure you want to delete {{ bucketlist_item.name }}?
+    Are you sure you want to delete {{ bucketlist.name }}?
     <br />
     <br />
     <a href="{{ url_for('delete_bucketlist') }}">
         <button class="btn btn-danger">Delete</button>
     </a>
-    <a href="{{ url_for('show_all_bucketlist_items') }}">Cancel</a>
+    <a href="{{ url_for('show_all_bucketlists') }}">Cancel</a>
 {% endblock %}

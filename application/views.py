@@ -143,7 +143,7 @@ def load_delete_bucketlist(name, description):
                     bucketlist = bucketlist
                     break
     return render_template('delete_bucketlist.html', 
-                           bucket_obj=bucketlist)
+                           bucketlist=bucketlist)
                                     
 @app.route('/edit-bucketlist/<name>/<description>', methods=['GET', 'POST'])
 def edit_bucket_list(name, description):
