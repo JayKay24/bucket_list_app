@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/JayKay24/bucket_list_app.svg?branch=develop)](https://travis-ci.org/JayKay24/bucket_list_app)
 [![Coverage Status](https://coveralls.io/repos/github/JayKay24/bucket_list_app/badge.svg?branch=develop)](https://coveralls.io/github/JayKay24/bucket_list_app?branch=develop)
-[![Code Climate](https://codeclimate.com/github/codeclimate/codeclimate/badges/gpa.svg)](https://codeclimate.com/github/codeclimate/codeclimate)
 # Bucket List Creator
 
 What would you like to do in the next few years? Climbs a mountain? Learn to
