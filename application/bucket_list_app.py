@@ -33,6 +33,10 @@ class BucketListApp:
                 if (email+password) == username:
                     user.current = True
                     return True
+            else:
+                return False
+        else:
+            return False
         
     def return_user(self):
         """
