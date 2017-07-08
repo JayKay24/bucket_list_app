@@ -50,8 +50,9 @@ class BucketListAppTest(unittest.TestCase):
         Assert response is False if bucketlist does not exist.
         """
         self.bucket_list_app.load_user("james@gmail.com", "pass")
-        response = self.bucket_list_app.delete_bucketlist("Mountain Climbing",
+        self.bucket_list_app.load_bucketlist("Mountain Climbing",
                                         "Climb all mountains in Kenya")
+        response = self.bucket_list_app.delete_bucketlist()
         self.assertFalse(response, 
         "should return False for a non-existent bucketlist")
         
@@ -62,8 +63,10 @@ class BucketListAppTest(unittest.TestCase):
         self.bucket_list_app.load_user("james@gmail.com", "pass")
         self.bucket_list_app.create_bucketlist("Mountain Climbing", 
                                         "Climb all mountains in Kenya")
-        response = self.bucket_list_app.delete_bucketlist("Mountain Climbing",
+        self.bucket_list_app.load_bucketlist("Mountain Climbing",
                                         "Climb all mountains in Kenya")
+        response = self.bucket_list_app.delete_bucketlist()
+                                        
         self.assertTrue(response, "should return True if bucketlist exists")
         
     def test_edit_bucketlist_returns_True_if_bucketlist_exists(self):
@@ -105,8 +108,9 @@ class BucketListAppTest(unittest.TestCase):
                                         "Climb all mountains in Kenya")
         self.bucket_list_app.create_bucketlist_item("Lenana", 
                                         "Climb Lenana peak and camp there.")
-        response = self.bucket_list_app.delete_bucketlist_item("Lenana", 
+        self.bucket_list_app.load_bucketlist_item("Lenana", 
                                         "Climb Lenana peak and camp there.")
+        response = self.bucket_list_app.delete_bucketlist_item()
         self.assertTrue(response, 
         "should return True if a bucketlist item exists")
         
