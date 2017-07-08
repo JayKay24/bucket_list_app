@@ -63,7 +63,7 @@ class BucketListApp:
                 print(user.bucketlists)
                 return True
         
-    def delete_bucketlist(self, name, description):
+    def delete_bucketlist(self):
         """
         Delete a bucketlist using the strings name and description.
         """
@@ -73,7 +73,7 @@ class BucketListApp:
             if user.current is True:
                 for bucketlist_name, bucketlist in user.bucketlists.items():
                     print(bucketlist_name)
-                    if (name+description) == bucketlist_name:
+                    if bucketlist.current is True:
                         user.bucketlists.pop(bucketlist_name, None)
                         print(user.bucketlists)
                         return True

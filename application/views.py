@@ -117,17 +117,33 @@ def create_bucket_list():
     else:
         form = BucketListForm()
     return render_template('create_bucketlist.html', form=form)
- 
-@app.route('/delete-bucketlist/<name>/<description>')
-def delete_bucketlist(name, description):
+
+@app.route('/delete-bucketlist/')
+def delete_bucketlist():
     """
     Delete a bucketlist in the application.
     """
-    response = bucket_list_app.delete_bucketlist(name, description)
+    response = bucket_list_app.delete_bucketlist()
     print(response)
     if response is True:
         flash('Bucketlist successfully deleted!', 'success')
         return redirect(url_for('show_all_bucketlists'))
+    
+@app.route('/load-delete-bucketlist/<name>/<description>')
+def load_delete_bucketlist(name, description):
+    """
+    Load a bucketlist for deletion from the application.
+    """
+    bucket_list_app.load_bucketlist(name, description)
+    bucketlist = None
+    for username, user in bucket_list_app.users.items():
+        if user.current is True:
+            for bucketlist_name, bucketlist in user.bucketlists.items():
+                if bucketlist.current is True:
+                    bucketlist = bucketlist
+                    break
+    return render_template('delete_bucketlist.html', 
+                           bucket_obj=bucketlist)
                                     
 @app.route('/edit-bucketlist/<name>/<description>', methods=['GET', 'POST'])
 def edit_bucket_list(name, description):
@@ -212,7 +228,7 @@ def create_bucketlist_item(name, description):
                            bucketlist=current_bucketlist)
                            
     
-@app.route('delete_bucketlist_item')
+@app.route('/delete_bucketlist_item')
 def delete_bucketlist_item(): 
     """
     Delete a bucketlist item from the application.
@@ -236,6 +252,7 @@ def load_delete_bucketlist_item(name, description):
                     for bucketitem_name, bucketitem in bucketlist.bucketlist_items.items():
                         if bucketitem.current is True:
                             bucketlist_item = bucketitem
+                            break
     return render_template('delete_bucketlist_item.html', 
                            bucketlist_item=bucketlist_item)
     

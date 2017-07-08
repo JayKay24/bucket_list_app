@@ -1,16 +1,12 @@
 {% extends "base.html" %}
-{% from "macros/form_field.html" import form_field %}
-{% block title %}Delete{% endblock %}
-{% block content_title %}Delete{% endblock %}
+{% block title %}Delete Bucketlist Item{% endblock %}
+{% block content_title %}Delete Bucketlist Item{% endblock %}
 {% block content %}
-<form action="{{ url_for('delete_bucketlist', obj=obj) }}" class="form form-horizontal" method="post">
-    {{ obj.name }}
-    {{ obj.description }}
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-9">
-            <button type="submit" class="btn btn-default">Register</button>
-            <a class="btn" href="{{ url_for('show_all_bucketlists') }}">Cancel</a>
-        </div>
-    </div>
-</form>
+    Are you sure you want to delete {{ bucketlist_item.name }}?
+    <br />
+    <br />
+    <a href="{{ url_for('delete_bucketlist') }}">
+        <button class="btn btn-danger">Delete</button>
+    </a>
+    <a href="{{ url_for('show_all_bucketlist_items') }}">Cancel</a>
 {% endblock %}
