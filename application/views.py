@@ -94,6 +94,8 @@ def show_all_bucketlists():
         if user.current is True:
             bucketlists = list(user.bucketlists.values())
             break
+    if len(bucketlists) == 0:
+        flash('There are no bucketlists', 'info')
     return render_template('show_bucketlists.html', 
                 all_bucketlists=bucketlists)
                            
@@ -170,7 +172,6 @@ def edit_bucket_list(name, description):
             flash('Bucketlist has been successfully edited!', 'success')
             return redirect(url_for('show_all_bucketlists'))
     else:
-        bucket_list_app.return_bucketlist()
         form = BucketListForm(obj=current_bucketlist)
     return render_template('edit_bucketlist.html', form=form, 
                            bucketlist=current_bucketlist)
@@ -192,7 +193,8 @@ def show_all_bucketlist_items():
                 if bucketlist.current is True:
                     bucketlist_items = list(bucketlist.bucketlist_items.values())
                     break
-                
+    if len(bucketlist_items) == 0:
+        flash('There are no bucketlist items in this bucketlist', 'info')
     return render_template('show_bucketlist_items.html', 
         bucketlist_items=bucketlist_items)
                            
@@ -256,3 +258,33 @@ def load_delete_bucketlist_item(name, description):
     return render_template('delete_bucketlist_item.html', 
                            bucketlist_item=bucketlist_item)
     
+@app.route('/edit-bucketlist_item/<name>/<description>', methods=['GET', 'POST'])
+def edit_bucketlist_item(name, description):
+    """
+    Edit a bucketlist item in the application.
+    """
+    bucket_list_app.load_bucketlist_item(name, description)
+    current_bucketlist_item = None
+    for username, user in bucket_list_app.users.items():
+        if user.current is True:
+            for bucketlist_name, bucketlist in user.bucketlists.items():
+                if bucketlist.current is True:
+                    for bucketitem_name, bucketitem in bucketlist.bucketlist_items.items():
+                        if bucketitem.current is True:
+                            current_bucketlist_item = bucketitem
+                            break
+    if request.method == 'POST':
+        form = BucketListForm(request.form, 
+                              obj=current_bucketlist_item)
+        if form.validate():
+            name = form.name.data
+            description = form.description.data
+            
+            bucket_list_app.edit_bucketlist_item(name, description)
+            flash('Bucketlist item has been successfully edited!', 'success')
+            return redirect(url_for('show_all_bucketlist_items'))
+    else:
+        form = BucketListForm(obj=current_bucketlist_item)
+    return render_template('edit_bucketlist_item.html', form=form, 
+                           bucketlist_item=current_bucketlist_item)
+                           
