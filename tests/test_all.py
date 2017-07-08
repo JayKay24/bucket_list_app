@@ -8,6 +8,7 @@ from test_bucket_list import BucketListTest
 from test_login import LoginTest
 from test_create_bucketlist import CreateBucketListTest
 from test_bucket_list_app import BucketListAppTest
+from test_show_bucketlists import ShowBucketListsTest
 
 def suite():
     """
@@ -20,10 +21,11 @@ def suite():
     login_suite = unittest.makeSuite(LoginTest)
     create_bucketlist_suite = unittest.makeSuite(CreateBucketListTest)
     bucket_list_app_suite = unittest.makeSuite(BucketListAppTest)
+    show_bucketlists_suite = unittest.makeSuite(ShowBucketListsTest)
     
     return unittest.TestSuite((home_suite, user_suite, bucket_list_suite, 
                                login_suite, create_bucketlist_suite,
-                               bucket_list_app_suite))
+                               bucket_list_app_suite, show_bucketlists_suite))
     
 if __name__ == '__main__':
     unittest.main(defaultTest='suite')
