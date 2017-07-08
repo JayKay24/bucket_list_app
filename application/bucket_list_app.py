@@ -143,7 +143,7 @@ class BucketListApp:
                 else:
                     return False
             
-    def delete_bucketlist_item(self, name, description):
+    def delete_bucketlist_item(self):
         """
         Delete a bucketlist item using the strings name and description.
         """
@@ -153,7 +153,7 @@ class BucketListApp:
                     bucketlist.rename_bucketlist_item_keys()
                     if bucketlist.current is True:
                         for bucketitem_name, bucketitem in bucketlist.bucketlist_items.items():
-                            if (name+description) == bucketitem_name:
+                            if bucketitem.current is True:
                                 bucketlist.bucketlist_items.pop(bucketitem_name, None)
                                 return True
                         else:

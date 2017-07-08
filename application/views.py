@@ -212,10 +212,30 @@ def create_bucketlist_item(name, description):
                            bucketlist=current_bucketlist)
                            
     
-@app.route('/delete-bucketlist-item/<name>/<description>')
+@app.route('delete_bucketlist_item')
+def delete_bucketlist_item(): 
+    """
+    Delete a bucketlist item from the application.
+    """
+    response = bucket_list_app.delete_bucketlist_item()
+    if response is True:
+        flash('Bucketlist item has been successfully deleted!', 'success')
+        return redirect(url_for('show_all_bucketlist_items'))
+    
+@app.route('/load-delete-bucketlist-item/<name>/<description>')
 def load_delete_bucketlist_item(name, description):
     """
     Load a bucketlist item for deletion from the application.
     """
     bucket_list_app.load_bucketlist_item(name, description)
-    return redirect(url_for('delete_bucketlist_item'))
+    bucketlist_item = None
+    for username, user in bucket_list_app.users.items():
+        if user.current is True:
+            for bucketlist_name, bucketlist in user.bucketlists.items():
+                if bucketlist.current is True:
+                    for bucketitem_name, bucketitem in bucketlist.bucketlist_items.items():
+                        if bucketitem.current is True:
+                            bucketlist_item = bucketitem
+    return render_template('delete_bucketlist_item.html', 
+                           bucketlist_item=bucketlist_item)
+    
