@@ -205,7 +205,6 @@ class BucketListApp:
                             if bucketitem.current is True:
                                 bucketitem.name = name
                                 bucketitem.description = description
-                                self.return_bucketlist_item()
                                 return True
                         else:
                             return False

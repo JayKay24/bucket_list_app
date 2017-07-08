@@ -277,11 +277,11 @@ def edit_bucketlist_item(name, description):
             name = form.name.data
             description = form.description.data
             
-            bucket_list_app.edit_bucketlist(name, description)
+            bucket_list_app.edit_bucketlist_item(name, description)
             flash('Bucketlist item has been successfully edited!', 'success')
             return redirect(url_for('show_all_bucketlist_items'))
     else:
         form = BucketListForm(obj=current_bucketlist_item)
-    return render_template('edit_bucketlist.html', form=form, 
-                           bucketlist=current_bucketlist_item)
+    return render_template('edit_bucketlist_item.html', form=form, 
+                           bucketlist_item=current_bucketlist_item)
                            
