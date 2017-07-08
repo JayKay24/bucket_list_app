@@ -212,3 +212,10 @@ def create_bucketlist_item(name, description):
                            bucketlist=current_bucketlist)
                            
     
+@app.route('/delete-bucketlist-item/<name>/<description>')
+def load_delete_bucketlist_item(name, description):
+    """
+    Load a bucketlist item for deletion from the application.
+    """
+    bucket_list_app.load_bucketlist_item(name, description)
+    return redirect(url_for('delete_bucketlist_item'))
