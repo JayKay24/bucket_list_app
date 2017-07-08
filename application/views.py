@@ -44,6 +44,7 @@ def register():
                 return redirect(url_for('login'))
             else:
                 flash('User already registered!', 'danger')
+                return redirect(url_for('login'))
     else:
         form = RegistrationForm()
     return render_template('register.html', form=form)
