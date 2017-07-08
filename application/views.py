@@ -206,7 +206,6 @@ def create_bucketlist_item(name, description):
                 flash('Bucketlist item already exists!', 'success')
             return redirect(url_for('show_all_bucketlist_items'))
     else:
-        bucket_list_app.return_bucketlist()
         form = BucketListForm()
     return render_template('create_bucketlist_item.html', form=form, 
                            bucketlist=current_bucketlist)
