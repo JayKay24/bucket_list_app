@@ -28,6 +28,7 @@ class BucketListApp:
         Load the current user into the application upon logging in.
         """
         if len(self.users) > 0:
+            self.return_user()
             for username, user in self.users.items():
                 if (email+password) == username:
                     user.current = True
@@ -79,6 +80,7 @@ class BucketListApp:
         """
         Load the current bucketlist for editing.
         """
+        self.return_bucketlist()
         for username, user in self.users.items():
             user.rename_bucketlist_keys()
             for bucketlist_name, bucketlist in user.bucketlists.items():
@@ -132,7 +134,7 @@ class BucketListApp:
                     bucketlist.rename_bucketlist_item_keys()
                     if bucketlist.current is True:
                         bucketlist_item = BucketListItem(name, description)
-                        bucketlist[bucketlist_item.get_full_name()] = bucketlist_item
+                        bucketlist.bucketlist_items[bucketlist_item.get_full_name()] = bucketlist_item
                         return True
                 else:
                     return False
