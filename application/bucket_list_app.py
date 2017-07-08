@@ -154,7 +154,7 @@ class BucketListApp:
                     if bucketlist.current is True:
                         for bucketitem_name, bucketitem in bucketlist.bucketlist_items.items():
                             if (name+description) == bucketitem_name:
-                                bucketlist.pop(bucketitem_name, None)
+                                bucketlist.bucketlist_items.pop(bucketitem_name, None)
                                 return True
                         else:
                             return False
