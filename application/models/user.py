@@ -8,11 +8,22 @@ class User:
         self.lname = last_name
         self.email = email
         self.password = password
-        # Store the user's bucketlists in a list.
-        self.bucketlists = []
+        # Store the user's bucketlists in a dictionary.
+        self.bucketlists = {}
+        self.current = False
         
-    def get_full_name(self):
+    def get_credentials(self):
         """
         Return the user's full name.
         """
-        return self.fname + self.lname
+        return self.email + self.password
+        
+    def rename_bucketlist_keys(self):
+        """
+        Reset the keys of a bucketlists dictionary to new names.
+        """
+        all_values = list(self.bucketlists.values())
+        self.bucketlists.clear()
+        for value in all_values:
+            self.bucketlists[value.get_full_name()] = value
+        

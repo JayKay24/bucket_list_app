@@ -3,7 +3,7 @@ This module defines the routes to be used by the flask application instance.
 """
 from flask import render_template, redirect, request, url_for, flash, session
 
-from bucket_list_app import BucketListApp, all_users, all_bucketlists
+from bucket_list_app import BucketListApp
 from forms import RegistrationForm, LoginForm, BucketListForm
 from models.bucket_list import BucketList
 
@@ -31,6 +31,11 @@ def register():
             last_name = form.last_name.data
             email = form.email.data
             password = form.password.data
+            reenter_password = form.reenter_password.data
+            
+            if password != reenter_password:
+                flash('Please enter a matching password!', 'danger')
+                return redirect(url_for('register'))
             
             response = bucket_list_app.create_user(first_name, last_name, 
                                                    email, password)
@@ -39,6 +44,7 @@ def register():
                 return redirect(url_for('login'))
             else:
                 flash('User already registered!', 'danger')
+                return redirect(url_for('login'))
     else:
         form = RegistrationForm()
     return render_template('register.html', form=form)
@@ -55,7 +61,6 @@ def login():
             password = form.password.data
             
             response = bucket_list_app.load_user(email, password)
-            print(response)
             if response is True:
                 flash('You have been successfully logged in!', 'success')
                 session['logged_in'] = True
@@ -74,7 +79,7 @@ def logout():
     Return the user back to the homepage.
     """
     session.pop('logged_in', None)
-    bucket_list_app.users.append(bucket_list_app.current_user)
+    bucket_list_app.return_user()
     flash('You were logged out', 'success')
     return redirect(url_for('homepage'))
     
@@ -84,8 +89,13 @@ def show_all_bucketlists():
     """
     Display all bucket lists.
     """
+    bucketlists = None
+    for username, user in bucket_list_app.users.items():
+        if user.current is True:
+            bucketlists = list(user.bucketlists.values())
+            break
     return render_template('show_bucketlists.html', 
-                all_bucketlists=bucket_list_app.current_user.bucketlists)
+                all_bucketlists=bucketlists)
                            
 @app.route('/create-bucketlist', methods=['GET', 'POST'])
 def create_bucket_list():
@@ -114,10 +124,10 @@ def delete_bucketlist(name, description):
     Delete a bucketlist in the application.
     """
     response = bucket_list_app.delete_bucketlist(name, description)
+    print(response)
     if response is True:
         flash('Bucketlist successfully deleted!', 'success')
-        return redirect(url_for('show_all_bucketlists', 
-                    all_bucketlists=bucket_list_app.current_user.bucketlists))
+        return redirect(url_for('show_all_bucketlists'))
                                     
 @app.route('/edit-bucketlist/<name>/<description>', methods=['GET', 'POST'])
 def edit_bucket_list(name, description):
@@ -125,9 +135,17 @@ def edit_bucket_list(name, description):
     Edit a bucketlist in the application.
     """
     bucket_list_app.load_bucketlist(name, description)
+    current_bucketlist = None
+    for username, user in bucket_list_app.users.items():
+        if user.current is True:
+            for bucketlist_name, bucketlist in user.bucketlists.items():
+                if bucketlist.current is True:
+                    current_bucketlist = bucketlist
+                    break
+                
     if request.method == 'POST':
         form = BucketListForm(request.form, 
-                              obj=bucket_list_app.current_bucketlist)
+                              obj=current_bucketlist)
         if form.validate():
             name = form.name.data
             description = form.description.data
@@ -136,8 +154,61 @@ def edit_bucket_list(name, description):
             flash('Bucketlist has been successfully edited!', 'success')
             return redirect(url_for('show_all_bucketlists'))
     else:
-        bucket_list_app.current_user.bucketlists.append(bucket_list_app.current_bucketlist)
-        form = BucketListForm(obj=bucket_list_app.current_bucketlist)
+        bucket_list_app.return_bucketlist()
+        form = BucketListForm(obj=current_bucketlist)
     return render_template('edit_bucketlist.html', form=form, 
-                           bucketlist=bucket_list_app.current_bucketlist)
+                           bucketlist=current_bucketlist)
+                           
+@app.route('/load-bucketlist/<name>/<description>')
+def load_bucketlist(name, description):
+    bucket_list_app.load_bucketlist(name, description)
+    return redirect(url_for('show_all_bucketlist_items'))
+                           
+@app.route('/show_all_bucketlist_items')
+def show_all_bucketlist_items():
+    """
+    Show all the bucketist items in a bucketlist.
+    """
+    bucketlist_items = None
+    for username, user in bucket_list_app.users.items():
+        if user.current is True:
+            for bucketlist_name, bucketlist in user.bucketlists.items():
+                if bucketlist.current is True:
+                    bucketlist_items = list(bucketlist.bucketlist_items.values())
+                    break
+                
+    return render_template('show_bucketlist_items.html', 
+        bucketlist_items=bucketlist_items)
+                           
+@app.route('/create-bucketlist-item/<name>/<description>', methods=['GET', 'POST'])
+def create_bucketlist_item(name, description):
+    """
+    Create a bucketlist item in the application.
+    """
+    bucket_list_app.load_bucketlist(name, description)
+    current_bucketlist = None
+    for username, user in bucket_list_app.users.items():
+        if user.current is True:
+            for bucketlist_name, bucketlist in user.bucketlists.items():
+                if bucketlist.current is True:
+                    current_bucketlist = bucketlist
+                    break
+                
+    if request.method == 'POST':
+        form = BucketListForm(request.form)
+        if form.validate():
+            name = form.name.data
+            description = form.description.data
+            
+            response = bucket_list_app.create_bucketlist_item(name, description)
+            if response is True:
+                flash('Bucketlist item was successfully created!', 'success')
+            elif response is False:
+                flash('Bucketlist item already exists!', 'success')
+            return redirect(url_for('show_all_bucketlist_items'))
+    else:
+        form = BucketListForm()
+    return render_template('create_bucketlist_item.html', form=form, 
+                           bucketlist=current_bucketlist)
+                           
     
