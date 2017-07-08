@@ -191,7 +191,8 @@ def show_all_bucketlist_items():
                 if bucketlist.current is True:
                     bucketlist_items = list(bucketlist.bucketlist_items.values())
                     break
-                
+    if len(bucketlist_items) == 0:
+        flash('There are no bucketlists in the application', 'info')
     return render_template('show_bucketlist_items.html', 
         bucketlist_items=bucketlist_items)
                            
