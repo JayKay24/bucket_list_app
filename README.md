@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/JayKay24/bucket_list_app.svg?branch=develop)](https://travis-ci.org/JayKay24/bucket_list_app)
+[![Coverage Status](https://coveralls.io/repos/github/JayKay24/bucket_list_app/badge.svg?branch=develop)](https://coveralls.io/github/JayKay24/bucket_list_app?branch=develop)
+[![Issue Count](https://codeclimate.com/github/JayKay24/bucket_list_app/badges/issue_count.svg)](https://codeclimate.com/github/JayKay24/bucket_list_app)
 # Bucket List Creator
 
 What would you like to do in the next few years? Climbs a mountain? Learn to
@@ -34,14 +37,6 @@ Clone the repository using the url:
 
 ```
 git clone https://github.com/JayKay24/bucket_list_app.git
-```
-
-## Running tests
-
-Open your python interpreter and change directory into the tests folder
-
-```
-pytest test_bucket_list_app.py
 ```
 
 ## Usage:
